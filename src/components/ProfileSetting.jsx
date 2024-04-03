@@ -19,7 +19,7 @@ const ProfileSetting = () => {
       </div>
 
       <div>
-        <h1 className="text-[#392e2d] text-[clamp(2rem,2vw,5rem)] text-left uppercase font-extrabold py-5 border-b-2 border-[#000]">
+        <h1 className="text-[#392e2d] text-[clamp(2rem,8vw,5rem)] text-left uppercase font-extrabold py-5 border-b-2 border-[#000]">
           profile settings
         </h1>
 

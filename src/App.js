@@ -3,14 +3,11 @@ import './App.css';
 import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import ProfileSetting from './components/ProfileSetting';
+import AppRouters from './routes/AppRouters';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-      <LoginPage/>
-      <ProfileSetting />
-    </div>
+      <AppRouters/>
   );
 }
 
