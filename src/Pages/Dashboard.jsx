@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
+import ProfileSetting from '../components/ProfileSetting'
 
 
 const Dashboard = () => {
@@ -12,8 +13,8 @@ const Dashboard = () => {
           <Sidebar />
         </div>
 
-        <div className="h-[100vh] overflow-auto flex-2 px-0 md:px-2 pt-3">
-          {/* <MainContent /> */}
+        <div className="h-[100vh] w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
+          <ProfileSetting />
         </div>
       </div>
     </>
