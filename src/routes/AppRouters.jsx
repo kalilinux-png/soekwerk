@@ -1,28 +1,25 @@
 import React from 'react';
-import { Route, Routes } from "react-router-dom";
-import ProfileStaffPage from '../pages/ProfileStaffPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Paths } from './path';
-import ProfileSettingPage from '../pages/ProfileSettingPage';
-import CreateListingPage from '../pages/CreateListingPage';
-import UsersPage from '../pages/UsersPage';
-import Dashboard from '../pages/Dashboard';
-import LoginPagesPage from '../pages/LoginPagesPage';
+import ProfileStaffPage from '../Pages/ProfileStaffPage';
+import ProfileSettingPage from '../Pages/ProfileSettingPage';
+import CreateListingPage from '../Pages/CreateListingPage';
+import UsersPage from '../Pages/UsersPage';
+import Dashboard from '../Pages/Dashboard';
+import LoginPagesPage from '../Pages/LoginPagesPage';
 
 
 
 const AppRouters = () => {
   return (
-    <Routes>
-      <Route>
+      <Routes>
         <Route path={Paths.login} element={<LoginPagesPage />} />
         <Route path={Paths.dashboard} element={<Dashboard />} />
         <Route path={Paths.createListing} element={<CreateListingPage />} />
         <Route path={Paths.users} element={<UsersPage />} />
         <Route path={Paths.profileStaff} element={<ProfileStaffPage />} />
         <Route path={Paths.profileSetting} element={<ProfileSettingPage />} />
-
-      </Route>
-    </Routes>
+      </Routes>
   )
 }
 
