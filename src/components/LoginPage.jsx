@@ -4,8 +4,8 @@ import loginImg from "../assets/images/soekwerk.jpeg"
 const LoginPage = () => {
   return (
     <>
-      <div className="bg-[#5c6065] py-[4rem]">
-        <div className="w-full max-w-[1120px] mx-auto  bg-[#fff] flex items-center  rounded-[1.9rem]">
+      <div className="py-[4rem] px-10">
+        <div className="w-full max-w-[1120px] mx-auto  bg-[#fff] flex items-center rounded-[1.9rem]">
           <div className="w-full login bg-[#c7bdb1] px-[5rem] py-[2.5rem] rounded-tl-[1.9rem] rounded-bl-[1.9rem]">
             <div className="form-heading text-left">
               <h1 className="font-bold text-[1.5rem]">Login</h1>
@@ -36,7 +36,7 @@ const LoginPage = () => {
           </div>
 
           <div className="image  px-9">
-            <img className="w-[800px] " src={loginImg} alt="" />
+            <img className="w-[clamp(600px,2vw,800px)] " src={loginImg} alt="" />
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@ import navBar from '../assets/images/soekwerk_nav.jpeg'
 const Navbar = () => {
   return (
     <>
-      <div className=''>
-        <img className='w-full h-[180px]' src={navBar} alt="" />
+      <div className='fixed top-0 w-full z-[99999]'>
+        <img className='w-full h-[150px]' src={navBar} alt="" />
       </div>
     </>
   )

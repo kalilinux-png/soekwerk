@@ -14,7 +14,7 @@ const Sidebar = () => {
                 <ul key={element.path}>
                   <li>
                     <Link to={element.path}>
-                      <div className='flex items-center gap-3 uppercase text-[1.1rem] border-b border-[#ccc] py-3 px-3'>
+                      <div className='flex items-center gap-3 uppercase text-[0.9rem] border-b border-[#ccc] py-3 px-3'>
                         <span className='text-[1.3rem] text-[#78909c]'>{element.icon}</span>
                         <span>{element.menuItem}</span>
                       </div>
@@ -30,7 +30,7 @@ const Sidebar = () => {
                 <ul key={element.path}>
                   <li>
                     <Link to={element.path}>
-                      <div className='flex items-center gap-3 uppercase text-[1.1rem] border-b border-[#ccc] py-3 px-3'>
+                      <div className='flex items-center gap-3 uppercase text-[1rem] border-b border-[#ccc] py-3 px-3'>
                         <span className='text-[1.3rem] text-[#78909c]'>{element.icon}</span>
                         <span>{element.menuItem}</span>
                       </div>

@@ -5,8 +5,8 @@ import LoginPage from '../components/LoginPage'
 const LoginPagesPage = () => {
   return (
     <>
-      <Navbar />
-      <div className="h-[100vh] w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
+      <Navbar className="" />
+      <div className="bg-[#5c6065] mt-[9.4rem] h-[100vh] w-full overflow-auto flex-2">
         <LoginPage />
       </div>
     </>
