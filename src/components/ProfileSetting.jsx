@@ -1,22 +1,10 @@
 import React from 'react'
+import AgentDetails from './AgentDetails'
 
 const ProfileSetting = () => {
   return (
     <div className="h-screen bg-[#f0f0f4] px-28">
-      <div className="agent-details flex items-center justify-between gap-14 py-6 border-b-2 border-[#000]">
-        <div className="uppercase text-[1.2rem]">
-          Agent Code:{" "}
-          <span className="text-[#c85e22] font-semibold">SW002</span>
-        </div>
-        <div className="uppercase text-[1.2rem]">
-          Agent Code:{" "}
-          <span className="text-[#c85e22] font-semibold">SW002</span>
-        </div>
-        <div className="uppercase text-[1.2rem]">
-          Agent Code:{" "}
-          <span className="text-[#c85e22] font-semibold">SW002</span>
-        </div>
-      </div>
+      <AgentDetails/>
 
       <div>
         <h1 className="text-[#392e2d] text-[clamp(2rem,8vw,5rem)] text-left uppercase font-extrabold py-5 border-b-2 border-[#000]">
