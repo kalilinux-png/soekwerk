@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Paths } from './path';
-import ProfileStaffPage from '../Pages/ProfileStaffPage';
-import ProfileSettingPage from '../Pages/ProfileSettingPage';
-import CreateListingPage from '../Pages/CreateListingPage';
-import UsersPage from '../Pages/UsersPage';
-import Dashboard from '../Pages/Dashboard';
-import LoginPagesPage from '../Pages/LoginPagesPage';
+import LoginPagesPage from '../pages/LoginPagesPage';
+import Dashboard from '../pages/Dashboard';
+import CreateListingPage from '../pages/CreateListingPage';
+import UsersPage from '../pages/UsersPage';
+import ProfileStaffPage from '../pages/ProfileStaffPage';
+import ProfileSettingPage from '../pages/ProfileSettingPage';
 
 
 
