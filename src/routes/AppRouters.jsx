@@ -13,14 +13,14 @@ import ProfileSettingPage from '../Pages/ProfileSettingPage';
 
 const AppRouters = () => {
   return (
-      <Routes>
-        <Route path={Paths.login} element={<LoginPagesPage />} />
-        <Route path={Paths.dashboard} element={<Dashboard />} />
-        <Route path={Paths.createListing} element={<CreateListingPage />} />
-        <Route path={Paths.users} element={<UsersPage />} />
-        <Route path={Paths.profileStaff} element={<ProfileStaffPage />} />
-        <Route path={Paths.profileSetting} element={<ProfileSettingPage />} />
-      </Routes>
+    <Routes>
+      <Route path={Paths.login} element={<LoginPagesPage />} />
+      <Route path={Paths.dashboard} element={<Dashboard />} />
+      <Route path={Paths.createListing} element={<CreateListingPage />} />
+      <Route path={Paths.users} element={<UsersPage />} />
+      <Route path={Paths.profileStaff} element={<ProfileStaffPage />} />
+      <Route path={Paths.profileSetting} element={<ProfileSettingPage />} />
+    </Routes>
   )
 }
 
