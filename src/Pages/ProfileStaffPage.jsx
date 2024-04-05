@@ -13,7 +13,7 @@ const ProfileStaffPage = () => {
           <Sidebar />
         </div>
 
-        <div className="h-[100vh] w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
+        <div className="bg-[#f0f0f4] h-[100vh] w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
           <ProfileStaff />
         </div>
       </div>
