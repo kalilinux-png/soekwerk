@@ -16,7 +16,7 @@ const CreateListing = () => {
   };
 
   return (
-    <div className="h-screen w-full max-w-[1150px] mx-auto px-8">
+    <div className="w-full max-w-[1150px] mx-auto px-8">
       <AgentDetails />
 
       <div className="users flex flex-col py-8">
