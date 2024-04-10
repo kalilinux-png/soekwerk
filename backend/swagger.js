@@ -37,7 +37,11 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: `${HOST}${PORT}`
+  host: `${HOST}${PORT}`,
+  "schemes": [
+    "https",
+    "http"
+  ],
 };
 
 const outputFile = './swagger.json';
