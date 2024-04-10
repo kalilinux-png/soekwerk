@@ -38,36 +38,41 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    try {
-      // Extract user credentials from request body
-      const { email, password } = req.body;
-  
-      // Check if user with the provided email exists
-      let user = await User.findOne({ email });
-      if (!user) { 
-        user = await Partner.findOne({email})
-      }
-      console.log("user",user)
-      if (!user) {
-        return res.status(400).json({ msg: 'Invalid credentials' });
-      }
-  
-      // Compare the provided password with the hashed password
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({ msg: 'Invalid credentials' });
-      }
-  
-      // Generate JWT token
-      const token = jwt.sign({ id: user._id ,role:user.role}, process.env.JWT_SECRET, { expiresIn: '1h' });
-  
-      // Return success response with token
-      res.json({ token });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ msg: 'Server error' });
+  try {
+    // Extract user credentials from request body
+    const { email, password } = req.body;
+
+    // Check if user with the provided email exists
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await Partner.findOne({ email })
     }
-  };
+    console.log("user", user)
+    if (!user) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+    // Compare the provided password with the hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+    // Generate JWT token with user role and permissions in the payload
+    const token = jwt.sign({
+      id: user._id,
+      role: user.role,
+      permissions: user?.accessControl  // Assuming 'permissions' is a field in your User or Partner schema
+    }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Return success response with token
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+};
+
 
 // Update user profile
 const updateProfile = async (req, res) => {
@@ -117,12 +122,12 @@ const changePassword = async (req, res) => {
 };
 
 
-  
-  module.exports = {
-    updateProfile,
-    changePassword,
-    register,
-    login
-  };
-  
+
+module.exports = {
+  updateProfile,
+  changePassword,
+  register,
+  login
+};
+
 

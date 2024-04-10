@@ -20,19 +20,15 @@ const PartnerSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 6,
-    select: false // Hide password from query results by default
   },
   role: {
     type: String,
-    enum: ['partner', 'admin'],
+    enum: ['partner'],
     default: 'partner'
   },
   accessControl: {
-    type: [{
-      module: String, // Name of the module or feature
-      permissions: [String] // Array of permissions for the module
-    }],
-    default: []
+    type: Array,
+    default: ['list_jobs', 'create_job', 'update_job', 'delete_job']
   },
   isActive: {
     type: Boolean,
@@ -49,7 +45,7 @@ const PartnerSchema = new mongoose.Schema({
 });
 
 // Virtual property to get Partner's full name
-PartnerSchema.virtual('fullName').get(function() {
+PartnerSchema.virtual('fullName').get(function () {
   return `${this.name}`;
 });
 
