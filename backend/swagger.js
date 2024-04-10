@@ -28,7 +28,7 @@ console.log(routeFiles);
 
 const swaggerAutogen = require('swagger-autogen')();
 const HOST =   process.env.ENVIROMENT === 'production' ? 'https://soekwerk.onrender.com/' : 'localhost'
-const PORT =  process.env.ENVIROMENT === 'production' ? '' : '5000';
+const PORT =  process.env.ENVIROMENT === 'production' ? '' : ':5000';
 
 console.log("host and port",HOST,PORT)
 
@@ -37,7 +37,7 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: `${HOST}:${PORT}`
+  host: `${HOST}${PORT}`
 };
 
 const outputFile = './swagger.json';
