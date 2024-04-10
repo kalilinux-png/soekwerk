@@ -27,7 +27,7 @@ const routeFiles = getRouteFiles();
 console.log(routeFiles);
 
 const swaggerAutogen = require('swagger-autogen')();
-const HOST =   process.env.ENVIROMENT === 'production' ? 'https://soekwerk.onrender.com/' : 'localhost'
+const HOST =   process.env.ENVIROMENT === 'production' ? 'https://soekwerk.onrender.com' : 'localhost'
 const PORT =  process.env.ENVIROMENT === 'production' ? '' : ':5000';
 
 console.log("host and port",HOST,PORT)
