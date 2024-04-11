@@ -1,0 +1,82 @@
+/* Overall Styles */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Modern, clean, and widely used font (similar to Gemini) */
+    background-color: #f0f2f5; /* Light gray background (similar to Gemini) */
+    color: #333; /* Dark text for readability */
+  }
+  
+  .registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 6rem; /* Adjust padding for content size */
+    border-radius: 10px; /* Rounded corners for a touch of softness */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    backdrop-filter: blur(2px); /* Optional: Subtle blur for a modern effect */
+    max-width: 600px; /* Increased responsiveness for larger screens */
+    margin: 0 auto; /* Center horizontally */
+  }
+  
+  /* Title & Text */
+  h1 {
+    font-size: 2.4rem; /* Larger title for better emphasis */
+    margin-bottom: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.08em; /* Slightly wider letter spacing for improved hierarchy */
+    text-align: center; /* Align title to center (similar to Gemini) */
+  }
+  
+  .form-text {
+    color: #888; /* Lighter gray for descriptions */
+    margin-bottom: 1.5rem;
+    font-size: 1rem; /* Slightly larger text for improved information visibility */
+    text-align: center;
+  }
+  
+  /* Input Fields */
+  .input-group {
+    margin-bottom: 2rem; /* Increased spacing for a more airy feel */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.7rem; /* Increased spacing for label separation */
+    font-weight: 600; /* Slightly bolder labels for emphasis */
+    color: #666; /* Lighter gray for labels (similar to Gemini) */
+  }
+  
+  input {
+    padding: 1.2rem 1.7rem; /* Increased padding for a spacious and comfortable feel */
+    border: 1px solid #ddd; /* Solid border for a clean look (similar to Gemini) */
+    border-radius: 4px; /* Reduced rounded corners for a professional look */
+    background-color: #fff; /* White background for readability (similar to Gemini) */
+    transition: all 0.2s ease-in-out;
+  }
+  
+  input:focus {
+    border-color: #999; /* Slightly darker border on focus */
+    outline: none; /* Remove default browser outline */
+    box-shadow: none; /* Remove neumorphism for cleaner look */
+  }
+  
+  /* Button */
+  button {
+    padding: 1.5rem 2.5rem; /* Increased padding for a prominent button */
+    border: none;
+    border-radius: 4px; /* Consistent rounded corners for a unified look */
+    background-color: #4285F4; /* Vibrant blue button color for strong call to action (similar to Gemini) */
+    color: #fff; /* White button text */
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    text-shadow: none; /* Remove text shadow for cleaner look */
+  }
+  
+  button:hover {
+    background-color: #38a3a5; /* Darker blue on hover for emphasis */
+  }
+  
