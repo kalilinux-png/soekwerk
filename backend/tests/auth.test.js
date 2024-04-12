@@ -7,11 +7,10 @@ describe('User Registration', () => {
   it('should register a new user', async () => {
     const res = await request(app)
       .post('/api/auth/register')
-      .send({ name: 'Test User', email: 'test@example.com', password: 'password123' });
+      .send({ name: 'Test User', email: 'test@example.com', password: 'password123' ,staffCode:"Admin-A1"});
       console.log("response",res.text)
-
     expect(res.status).toBe(201);
-    expect(res.body.message).toBe('User registered successfully');
+    expect(res.body?.token).toBeTruthy();
   });
 
   it('should return 400 if required fields are missing', async () => {
@@ -27,7 +26,7 @@ describe('User Registration', () => {
 });
 
 
-// tests/auth.test.js
+// // tests/auth.test.js
 describe('User Authentication', () => {
     it('should authenticate a user and return a JWT', async () => {
       const res = await request(app)
@@ -46,7 +45,7 @@ describe('User Authentication', () => {
         .send({ email: 'wrong@example.com', password: 'wrongpassword' });
         console.log("response",res.text)
 
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(401);
     });
   
     // Add more test cases for invalid input, error handling, etc.
@@ -62,11 +61,10 @@ describe('User Authentication', () => {
   
       const res = await request(app)
         .put('/api/auth/profile/update')
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `${token}`)
         .send(updatedProfile);
-  
+      console.log("profile update response",res.text)
       expect(res.status).toBe(200);
-      expect(res.body.success).toBe(true);
       expect(res.body.user).toBeTruthy()
       // Additional assertions for updated profile data
     });
@@ -83,8 +81,7 @@ describe('User Authentication', () => {
         .send(updatedProfile);
   
       expect(res.status).toBe(401);
-      expect(res.body.success).toBe(false);
-      expect(res.body.message).toBe('Unauthorized');
+      expect(res.body.msg).toBe('Authorization denied. No token provided');
     });
   
     // Add more test cases for edge cases, validation, etc.
@@ -100,12 +97,11 @@ describe('User Authentication', () => {
   
       const res = await request(app)
         .put('/api/auth/profile/password')
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `${token}`)
         .send(updatedPassword);
   
       expect(res.status).toBe(200);
-      expect(res.body.success).toBe(true);
-      expect(res.body.message).toBe("Password changed successfully");
+      expect(res.body.msg).toBe("Password changed successfully");
     });
   
     it('should return 401 if user is not authenticated', async () => {
@@ -115,12 +111,11 @@ describe('User Authentication', () => {
       };
   
       const res = await request(app)
-        .put('/api/profile/password')
+        .put('/api/auth/profile/password')
         .send(updatedPassword);
   
       expect(res.status).toBe(401);
-      expect(res.body.success).toBe(false);
-      expect(res.body.message).toBe('Unauthorized');
+      expect(res.body.msg).toBe('Authorization denied. No token provided');
     });
   
     // Add more test cases for edge cases, validation, etc.

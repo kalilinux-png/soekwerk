@@ -1,12 +1,12 @@
 const User = require('../models/User');
-const Partner = require('../models/Partner');
+const Partner = require('../models/Staff');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
   try {
     // Extract user data from request body
-    const { name, email, password } = req.body;
+    const { name, email, password,staffCode } = req.body;
 
     // Check if user with the same email already exists
     let user = await User.findOne({ email });
@@ -20,7 +20,8 @@ const register = async (req, res) => {
     user = new User({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      staffCode
     });
 
     // Save the user to the database
@@ -49,13 +50,13 @@ const login = async (req, res) => {
     }
     console.log("user", user)
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.status(401).json({ msg: 'Invalid credentials' });
     }
 
     // Compare the provided password with the hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.status(401).json({ msg: 'Invalid credentials' });
     }
 
     // Generate JWT token with user role and permissions in the payload
@@ -64,7 +65,8 @@ const login = async (req, res) => {
       role: user.role,
       permissions: user?.accessControl  // Assuming 'permissions' is a field in your User or Partner schema
     }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
+    // Set the JWT token as a cookie in the response
+    res.cookie('Authorization', token, { httpOnly: true, expires: new Date(Date.now() + 3600000) }); // Cookie expires in 1 hour
     // Return success response with token
     res.json({ token });
   } catch (error) {

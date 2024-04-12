@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  staffCode: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
@@ -25,7 +26,9 @@ const userSchema = new mongoose.Schema({
   }],
   location: String,
   resume: String,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  metaData: {type:Object}
+
 });
 
 module.exports = mongoose.model('User', userSchema);

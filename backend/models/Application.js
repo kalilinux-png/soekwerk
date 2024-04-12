@@ -7,7 +7,8 @@ const applicationSchema = new mongoose.Schema({
   resume: String,
   coverLetter: String,
   status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  metaData: {type:Object}
 });
 
 module.exports = mongoose.model('Application', applicationSchema);

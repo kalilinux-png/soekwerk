@@ -1,9 +1,9 @@
 // middleware/validation.js
 const { validationResult, check } = require('express-validator');
 exports.validateUserRegistration = (req, res, next) => {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: 'Name, email, and password are required' });
+    const { name, email, password ,staffCode} = req.body;
+    if (!name || !email || !password || !staffCode) {
+      return res.status(400).json({ message: 'Name, email, staffCode,and password are required' });
     }
     // Validate email format
     if (!isValidEmail(email)) {

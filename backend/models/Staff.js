@@ -41,7 +41,9 @@ const PartnerSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  metaData: {type:Object}
+
 });
 
 // Virtual property to get Partner's full name

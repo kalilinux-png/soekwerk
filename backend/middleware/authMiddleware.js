@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 // Middleware to authenticate user
 const authenticateUser = (req, res, next) => {
   // Get token from request headers
-  const token = req.header('Authorization');
+  const token = req.header('Authorization') || req.cookies.Authorization
 
   // Check if token is present
   if (!token) {
@@ -26,7 +26,7 @@ const authenticateUser = (req, res, next) => {
 // Middleware to authenticate admin
 const authenticateAdmin = (req, res, next) => {
   // Get token from request headers
-  const token = req.header('Authorization');
+  const token = req.header('Authorization') || req.cookies.Authorization
 
   // Check if token is present
   if (!token) {
@@ -55,7 +55,7 @@ const authenticateAdmin = (req, res, next) => {
 
 const authenticatePartner = (requiredPermissions) => (req, res, next) => {
   // Extract JWT token from request headers
-  const token = req.header('Authorization');
+  const token = req.header('Authorization') || req.cookies.Authorization
 
   // Check if token is provided
   if (!token) {

@@ -1,27 +1,39 @@
-const JobListing = require('../models/Joblisting');
+const JobListing = require('../models/Jobs');
 
 // Create a new job listing
 const createJobListing = async (req, res) => {
   try {
-    const { title, description, requirements } = req.body;
+    const { title, description, requirements, sector, industry, salary, country, companyName, region, reference, expireDate, webLink, companyId, jobFileId } = req.body;
 
     // Create a new job listing instance
     const jobListing = new JobListing({
       title,
       description,
-      requirements
+      requirements,
+      sector,
+      industry,
+      salary,
+      country,
+      companyName,
+      region,
+      reference,
+      expireDate,
+      webLink,
+      company: companyId, // Reference to Company schema
+      jobFile: jobFileId // Reference to JobFile schema
     });
 
     // Save the job listing to the database
     await jobListing.save();
 
     // Return success message
-    res.status(201).json({ msg: 'Job listing created successfully' });
+    res.status(201).json({ msg: 'Job listing created successfully', jobListing });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: 'Server error' });
   }
 };
+
 
 // Update an existing job listing
 const updateJobListing = async (req, res) => {
