@@ -1,0 +1,112 @@
+/* Base styles */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif; /* Modern, bold font */
+    background-color: #f5f5f5;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Gradient overlay for subtle depth */
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #333;
+    /* Text shadow for depth */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    font-weight: bold; /* Make heading bold */
+  }
+  
+  nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    margin-left: 1rem;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600; /* Bold navigation links */
+    transition: color 0.2s ease-in-out;
+  }
+  
+  nav a:hover {
+    color: #007bff; /* Blue hover color */
+  }
+  
+  /* Main Content */
+  main {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Stronger shadow for emphasis */
+    transition: all 0.2s ease-in-out;
+    position: relative;
+  }
+  
+  .post-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px); /* Slightly more prominent hover lift */
+  }
+  
+  .post-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+    color: #222; /* Darker, bolder title color */
+    font-weight: bold;
+    /* Use letter-spacing for a more modern feel */
+    letter-spacing: 0.05em;
+  }
+  
+  p {
+    font-size: 1rem; /* Slightly larger body text */
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #999; /* Lighter color for metadata */
+  }
+  
+  /* Footer (optional) */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+  }
+  

@@ -7,7 +7,8 @@ import UsersPage from '../Pages/UsersPage';
 import ProfileStaffPage from '../Pages/ProfileStaffPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import LoginPagesPage from '../Pages/LoginPagesPage';
-
+import App from "../Pages/blogsTest"
+import Registration from "../Pages/register"
 
 
 
@@ -21,6 +22,8 @@ const AppRouters = () => {
       <Route path={Paths.users} element={<UsersPage />} />
       <Route path={Paths.profileStaff} element={<ProfileStaffPage />} />
       <Route path={Paths.profileSetting} element={<ProfileSettingPage />} />
+      <Route path="/test" element={<App />} />
+      <Route path="/register" element={<Registration />} />
     </Routes>
   )
 }
