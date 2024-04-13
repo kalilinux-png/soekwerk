@@ -6,18 +6,18 @@ var token = ""
 describe('User Registration', () => {
   it('should register a new user', async () => {
     const res = await request(app)
-      .post('/api/auth/register')
-      .send({ name: 'Test User', email: 'test@example.com', password: 'password123' ,staffCode:"Admin-A1"});
-      console.log("response",res.text)
+      .post('/api/auth/staff/register')
+      .send({ name: 'Test User', email: 'test@example.com', password: 'password123', staffCode: "Admin-A1" });
+    console.log("response", res.text)
     expect(res.status).toBe(201);
     expect(res.body?.token).toBeTruthy();
   });
 
   it('should return 400 if required fields are missing', async () => {
     const res = await request(app)
-      .post('/api/auth/register')
+      .post('/api/auth/staff/register')
       .send({ name: 'Test User' }); // Missing email and password
-      console.log("response",res.text)
+    console.log("response", res.text)
 
     expect(res.status).toBe(400);
   });
@@ -28,96 +28,95 @@ describe('User Registration', () => {
 
 // // tests/auth.test.js
 describe('User Authentication', () => {
-    it('should authenticate a user and return a JWT', async () => {
-      const res = await request(app)
-        .post('/api/auth/login')
-        .send({ email: 'test@example.com', password: 'password123' });
-        console.log("response for user authentication",res.text)
+  it('should authenticate a user and return a JWT', async () => {
+    const res = await request(app)
+      .post('/api/auth/login')
+      .send({ email: 'test@example.com', password: 'password123' });
+    console.log("response for user authentication", res.text)
 
-      expect(res.status).toBe(200);
-      expect(res.body.token).toBeTruthy();
-      token = res.body.token;
-    });
-  
-    it('should return 401 if email or password is incorrect', async () => {
-      const res = await request(app)
-        .post('/api/auth/login')
-        .send({ email: 'wrong@example.com', password: 'wrongpassword' });
-        console.log("response",res.text)
-
-      expect(res.status).toBe(401);
-    });
-  
-    // Add more test cases for invalid input, error handling, etc.
+    expect(res.status).toBe(200);
+    expect(res.body.token).toBeTruthy();
+    token = res.body.token;
   });
 
-  describe('Profile Update Route', () => {
-    it('should update user profile successfully', async () => {
-      const updatedProfile = {
-        name: 'Updated Name',
-        email: 'updated@example.com',
-        // Add other fields to update
-      };
-  
-      const res = await request(app)
-        .put('/api/auth/profile/update')
-        .set('Authorization', `${token}`)
-        .send(updatedProfile);
-      console.log("profile update response",res.text)
-      expect(res.status).toBe(200);
-      expect(res.body.user).toBeTruthy()
-      // Additional assertions for updated profile data
-    });
-  
-    it('should return 401 if user is not authenticated', async () => {
-      const updatedProfile = {
-        name: 'Updated Name',
-        email: 'updated@example.com',
-        // Add other fields to update
-      };
-  
-      const res = await request(app)
-        .put('/api/auth/profile/update')
-        .send(updatedProfile);
-  
-      expect(res.status).toBe(401);
-      expect(res.body.msg).toBe('Authorization denied. No token provided');
-    });
-  
-    // Add more test cases for edge cases, validation, etc.
-  });
-  
+  it('should return 401 if email or password is incorrect', async () => {
+    const res = await request(app)
+      .post('/api/auth/login')
+      .send({ email: 'wrong@example.com', password: 'wrongpassword' });
+    console.log("response", res.text)
 
-  describe('Profile Password Update Route', () => {
-    it('should update user password successfully', async () => {
-      const updatedPassword = {
-        currentPassword: 'password123',
-        newPassword: 'newPassword123',
-      };
-  
-      const res = await request(app)
-        .put('/api/auth/profile/password')
-        .set('Authorization', `${token}`)
-        .send(updatedPassword);
-  
-      expect(res.status).toBe(200);
-      expect(res.body.msg).toBe("Password changed successfully");
-    });
-  
-    it('should return 401 if user is not authenticated', async () => {
-      const updatedPassword = {
-        currentPassword: 'currentPassword123',
-        newPassword: 'newPassword123',
-      };
-  
-      const res = await request(app)
-        .put('/api/auth/profile/password')
-        .send(updatedPassword);
-  
-      expect(res.status).toBe(401);
-      expect(res.body.msg).toBe('Authorization denied. No token provided');
-    });
-  
-    // Add more test cases for edge cases, validation, etc.
+    expect(res.status).toBe(401);
   });
-  
+
+  // Add more test cases for invalid input, error handling, etc.
+});
+
+describe('Profile Update Route', () => {
+  it('should update user profile successfully', async () => {
+    const updatedProfile = {
+      name: 'Updated Name',
+      email: 'updated@example.com',
+      // Add other fields to update
+    };
+
+    const res = await request(app)
+      .put('/api/auth/profile/update')
+      .set('Authorization', `${token}`)
+      .send(updatedProfile);
+    console.log("profile update response", res.text)
+    expect(res.status).toBe(200);
+    expect(res.body.user).toBeTruthy()
+    // Additional assertions for updated profile data
+  });
+
+  it('should return 401 if user is not authenticated', async () => {
+    const updatedProfile = {
+      name: 'Updated Name',
+      email: 'updated@example.com',
+      // Add other fields to update
+    };
+
+    const res = await request(app)
+      .put('/api/auth/profile/update')
+      .send(updatedProfile);
+
+    expect(res.status).toBe(401);
+    expect(res.body.msg).toBe('Authorization denied. No token provided');
+  });
+
+  // Add more test cases for edge cases, validation, etc.
+});
+
+
+describe('Profile Password Update Route', () => {
+  it('should update user password successfully', async () => {
+    const updatedPassword = {
+      currentPassword: 'password123',
+      newPassword: 'newPassword123',
+    };
+
+    const res = await request(app)
+      .put('/api/auth/profile/password')
+      .set('Authorization', `${token}`)
+      .send(updatedPassword);
+
+    expect(res.status).toBe(200);
+    expect(res.body.msg).toBe("Password changed successfully");
+  });
+
+  it('should return 401 if user is not authenticated', async () => {
+    const updatedPassword = {
+      currentPassword: 'currentPassword123',
+      newPassword: 'newPassword123',
+    };
+
+    const res = await request(app)
+      .put('/api/auth/profile/password')
+      .send(updatedPassword);
+
+    expect(res.status).toBe(401);
+    expect(res.body.msg).toBe('Authorization denied. No token provided');
+  });
+
+  // Add more test cases for edge cases, validation, etc.
+});

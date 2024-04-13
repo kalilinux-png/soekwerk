@@ -1,5 +1,7 @@
-const User = require('../models/User');
-const Partner = require('../models/Staff');
+// const User = require('../models/User');
+const User = require('../models/Staff');
+// ⚠️⚠️⚠️ don't get confused User with User's (job searching user) this are staff  too laxy to udpate code ,
+// that's why i added comment 😎
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -46,7 +48,7 @@ const login = async (req, res) => {
     // Check if user with the provided email exists
     let user = await User.findOne({ email });
     if (!user) {
-      user = await Partner.findOne({ email })
+      user = await User.findOne({ email })
     }
     console.log("user", user)
     if (!user) {

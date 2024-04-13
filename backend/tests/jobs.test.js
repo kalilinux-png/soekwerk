@@ -1,24 +1,19 @@
 const request = require('supertest');
 const app = require('../server'); // Assuming server.js is the entry point of your application
 var adminToken = "";
+const mongoose = require("mongoose")
+
+
 
 describe('User Authentication', () => {
     it('should authenticate a user and return a JWT', async () => {
         const res = await request(app)
             .post('/api/auth/login')
-            .send({ email: "test@example.com", password: 'password123' });
+            .send({ email: "admin@demo.com", password: 'admin@demo.com' });
 
         expect(res.status).toBe(200);
         expect(res.body.token).toBeTruthy();
         adminToken = res.body.token;
-    });
-
-    it('should return 401 if email or password is incorrect', async () => {
-        const res = await request(app)
-            .post('/api/auth/login')
-            .send({ email: 'wrong@example.com', password: 'wrongpassword' });
-
-        expect(res.status).toBe(400);
     });
 });
 
@@ -41,7 +36,7 @@ describe('Jobs Creation Route', () => {
 
         const res = await request(app)
             .post('/api/jobs/create')
-            .set('Authorization', `Bearer ${adminToken}`)
+            .set('Authorization', `${adminToken}`)
             .send(newJob);
 
         expect(res.status).toBe(201);
@@ -78,7 +73,7 @@ describe('Jobs Update Route', () => {
 
         const res = await request(app)
             .put(`/api/jobs/${jobIdToUpdate}/update`)
-            .set('Authorization', `Bearer ${adminToken}`)
+            .set('Authorization', `${adminToken}`)
             .send(updatedJobData);
 
         expect(res.status).toBe(200);
@@ -108,8 +103,8 @@ describe('Jobs Deletion Route', () => {
         const jobIdToDelete = '661533159fb8b659c4669672'; // Replace with valid job ID
   
         const res = await request(app)
-            .delete(`/api/jobs/${jobIdToDelete}`)
-            .set('Authorization', `Bearer ${adminToken}`);
+            .delete(`/api/jobs/${jobIdToDelete}/delete`)
+            .set('Authorization', `${adminToken}`);
   
         expect(res.status).toBe(200);
         expect(res.body.msg).toBe('Job listing deleted successfully');
@@ -119,8 +114,14 @@ describe('Jobs Deletion Route', () => {
         const jobIdToDelete = '123abc'; // Replace with valid job ID
   
         const res = await request(app)
-            .delete(`/api/jobs/${jobIdToDelete}`);
+            .delete(`/api/jobs/${jobIdToDelete}/delete`);
   
         expect(res.status).toBe(401);
     });
+});
+
+
+afterAll(done => {
+    mongoose.connection.close()
+    done();
 });

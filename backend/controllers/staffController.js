@@ -1,6 +1,7 @@
 // PartnerController.js
 const bcrypt = require('bcryptjs');
 const StaffModel = require('../models/Staff'); // Assuming you have a User model
+const logger = require("../loggers/logger")
 
 
 // Controller function to list all Staffs
@@ -21,7 +22,7 @@ const listAllStaffs = async (req, res) => {
 // Controller function for creating a user
 const createStaff = async (req, res) => {
   try {
-    const { name, email, password, accessControl } = req.body;
+    const { name, email, password, accessControl,staffCode } = req.body;
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -32,11 +33,13 @@ const createStaff = async (req, res) => {
       email,
       password: hashedPassword,
       accessControl,
+      staffCode
     });
 
     res.status(201).json({ success: true, data: newStaff });
   } catch (error) {
     console.error(error);
+    logger.error("Error in Creating Staff ",error)
     res.status(500).json({ success: false, message: 'Server Error', error: error });
   }
 };

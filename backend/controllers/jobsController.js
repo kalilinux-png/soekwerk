@@ -1,4 +1,5 @@
 const JobListing = require('../models/Jobs');
+const excelController = require('../controllers/excelController');
 
 // Create a new job listing
 const createJobListing = async (req, res) => {
@@ -82,9 +83,21 @@ const getAllJobListings = async (req, res) => {
   }
 };
 
+const downloadExcel = async (req, res) => {
+  try {
+    // Generate Excel with dynamic columns based on the Jobs model schema
+    await excelController.generateExcel(req, res, JobListing);
+  } catch (error) {
+    console.error('Error downloading Excel file:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
   createJobListing,
   updateJobListing,
   deleteJobListing,
-  getAllJobListings
+  getAllJobListings,
+  downloadExcel
 };

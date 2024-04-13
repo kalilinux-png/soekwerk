@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
     res.status(200).send("All Good 👍")
 })
 
-router.post('/register', validateUserRegistration,authController.register);
+router.post('/staff/register', validateUserRegistration,authController.register);
 // Route for user login
 router.post('/login',validateUserAuthentication, authController.login);
 // Route for updating user profile

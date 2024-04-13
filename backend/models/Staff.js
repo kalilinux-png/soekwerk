@@ -1,8 +1,8 @@
-// Partner.js
+// Staff.js
 
 const mongoose = require('mongoose');
 
-const PartnerSchema = new mongoose.Schema({
+const StaffSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -16,6 +16,10 @@ const PartnerSchema = new mongoose.Schema({
     trim: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/, 'Please fill a valid email address']
   },
+  staffCode: { 
+    type:String,
+    required:true
+  },
   password: {
     type: String,
     required: true,
@@ -23,7 +27,7 @@ const PartnerSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['partner'],
+    enum: ['partner','admin'],
     default: 'partner'
   },
   accessControl: {
@@ -42,15 +46,14 @@ const PartnerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  metaData: {type:Object}
-
+  metaData: { type: Object }
 });
 
-// Virtual property to get Partner's full name
-PartnerSchema.virtual('fullName').get(function () {
+// Virtual property to get Staff's full name
+StaffSchema.virtual('fullName').get(function () {
   return `${this.name}`;
 });
 
-const Partner = mongoose.model('Partner', PartnerSchema);
+const Staff = mongoose.model('Staff', StaffSchema);
 
-module.exports = Partner;
+module.exports = Staff;

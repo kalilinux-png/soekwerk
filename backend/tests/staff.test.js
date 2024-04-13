@@ -23,7 +23,8 @@ describe('User Authentication', () => {
 // Test data for creating a new staff
 const testData = {
   name: 'Test Staff',
-  email: 'teststaff@example.com',
+  email: 'teststaff2@example.com',
+  staffCode: "test-staff01",
   password: 'password123',
   accessControl: ['admin']
 };
@@ -31,7 +32,7 @@ const testData = {
 describe('Staff Endpoints', () => {
   // Clear the Staff collection before each test
   beforeEach(async () => {
-    await StaffModel.deleteMany();
+    await StaffModel.deleteMany({ email: testData.email });
   });
 
   // Test for creating a new staff
@@ -40,7 +41,7 @@ describe('Staff Endpoints', () => {
       .post('/api/staff/create')
       .set('Authorization', `${admin_token}`) // Replace <admin_token> with a valid admin token
       .send(testData);
-    console.log("create response",res.text)
+    console.log("create response", res.text)
     expect(res.statusCode).toEqual(201);
     expect(res.body.success).toBe(true);
     expect(res.body.data.name).toEqual(testData.name);
@@ -66,13 +67,12 @@ describe('Staff Endpoints', () => {
   // Test for updating a staff
   it('should update a staff', async () => {
     const staff = await StaffModel.create(testData);
-    console.log("staff",staff)
     const updatedData = { ...testData, name: 'Updated Test Staff' };
     const res = await request(app)
       .put(`/api/staff/${staff._id.toString()}`)
       .set('Authorization', `${admin_token}`) // Replace <admin_token> with a valid admin token
       .send(updatedData);
-    console.log("udpate response",res.text)
+    console.log("udpate response", res.text)
     expect(res.statusCode).toEqual(200);
     expect(res.body.success).toBe(true);
     expect(res.body.data.name).toEqual('Updated Test Staff');
@@ -81,5 +81,7 @@ describe('Staff Endpoints', () => {
 
 // Close the MongoDB connection after all tests are completed
 afterAll(async () => {
-  await mongoose.connection.close();
+  // await mongoose.connection.close();
+  // await StaffModel.deleteMany();
+
 });
