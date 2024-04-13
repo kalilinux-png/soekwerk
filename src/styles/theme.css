@@ -1,0 +1,33 @@
+/* src/styles/theme.css */
+
+/* Typography */
+body {
+    font-family: 'San Francisco', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Colors */
+  :root {
+    --primary-color: #007AFF; /* Apple's primary blue color */
+    --secondary-color: #5856D6; /* Apple's secondary purple color */
+    --text-color: #333; /* Default text color */
+  }
+  
+  /* Spacing */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  

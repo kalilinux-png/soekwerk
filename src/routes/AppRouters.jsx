@@ -9,6 +9,8 @@ import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import LoginPagesPage from '../Pages/LoginPagesPage';
 import App from "../Pages/blogsTest"
 import Registration from "../Pages/register"
+import ExcelUploader from "../Pages/ExcelUpload"
+import Navigation from "../components/Navigation/Navigation"
 
 
 
@@ -24,6 +26,8 @@ const AppRouters = () => {
       <Route path={Paths.profileSetting} element={<ProfileSettingPage />} />
       <Route path="/test" element={<App />} />
       <Route path="/register" element={<Registration />} />
+      <Route path="/excel" element={<ExcelUploader />} />
+      <Route path="/nav" element={<Navigation />} />
     </Routes>
   )
 }

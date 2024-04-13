@@ -1,5 +1,6 @@
 import React from 'react'
 import loginImg from "../assets/images/soekwerk.jpeg"
+import "./LoginPage.css"
 
 const LoginPage = () => {
   return (

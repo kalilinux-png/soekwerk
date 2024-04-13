@@ -1,0 +1,109 @@
+/* LoginPage.css */
+
+/* Body */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f5f5f7;
+  }
+  
+  /* Container */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Form */
+  .form {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  /* Form Title */
+  .form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Group */
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Label */
+  .input-label {
+    font-size: 14px;
+    color: #666666;
+  }
+  
+  /* Input Field */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007aff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Forgot Password Link */
+  .forgot-password {
+    font-size: 14px;
+    color: #007aff;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+  }
+  
+  /* Image Container */
+  .image-container {
+    display: none;
+  }
+  
+  /* Media Query for Image Container */
+  @media screen and (min-width: 768px) {
+    .image-container {
+      display: block;
+      flex: 1;
+      position: relative;
+    }
+  
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+  }
+  

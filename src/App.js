@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import ProfileSetting from './components/ProfileSetting';
 import AppRouters from './routes/AppRouters';
+import './styles/theme.css'; // Import theme styles
+import './styles/global.css'; // Import global styles
 
 function App() {
   return (
