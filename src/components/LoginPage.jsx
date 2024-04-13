@@ -1,7 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import loginImg from "../assets/images/soekwerk.jpeg"
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import validateLogin from '../validations/login';
+import { login } from "../redux/actions";
 
 const LoginPage = () => {
+  const { logins, handleSubmit } = useForm();
+  const [form, setForm] = useState({ username: "", password: "" });
+  const [error, setError] = useState({});
+  const loginState = useSelector((state) => state.Login);
+  const history = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setForm((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const { errors, isValid } = validateLogin(form);
+    if (isValid) {
+      setError("");
+      dispatch(
+        login({
+          form,
+          callback: () => {
+            history("/dashboard");
+          },
+        })
+      );
+    } else {
+      setError(errors);
+    }
+  };
+
   return (
     <>
       <div className="py-[4rem] px-10">
@@ -16,20 +53,17 @@ const LoginPage = () => {
               <input
                 type="text"
                 className="border placeholder:text-[#000] placeholder:text-[0.9rem] px-5 py-2.5 rounded-md"
-                placeholder="Mobile"
-              />
-              <input
-                type="text"
-                className="border placeholder:text-[#000] placeholder:text-[0.9rem] px-5 py-2.5 rounded-md"
                 placeholder="Email Address"
+                 onChange={handleChange}
               />
               <input
-                type="text"
+                type="password"
                 className="border placeholder:text-[#000] placeholder:text-[0.9rem] px-5 py-2.5 rounded-md"
-                placeholder="Staff Code"
+                placeholder="Password"
+                 onChange={handleChange}
               />
 
-              <button className="uppercase font-bold bg-[#fbbc41] rounded-md text-[1.25rem] py-2 shadow-[0px_0px_10px_4px_#78b172]">Login</button>
+              <button  onClick={ (e) => onSubmit(e)} className="uppercase font-bold bg-[#fbbc41] rounded-md text-[1.25rem] py-2 shadow-[0px_0px_10px_4px_#78b172]">Login</button>
             </form>
 
             <p className="Capitalize my-4 text-left">Forget Password- ? <span className="font-bold">Click here</span></p>
