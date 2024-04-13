@@ -19,7 +19,7 @@ const authenticateUser = (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    res.status(401).json({ msg: 'Authorization denied. Invalid token' });
+    res.status(401).json({ msg: 'Authorization denied. Invalid token or token expired' });
   }
 };
 
@@ -48,7 +48,7 @@ const authenticateAdmin = (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    res.status(401).json({ msg: 'Authorization denied. Invalid token' });
+    res.status(401).json({ msg: 'Authorization denied. Invalid token or token expired' });
   }
 };
 
@@ -83,7 +83,7 @@ const authenticatePartner = (requiredPermissions) => (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    return res.status(401).json({ message: 'Authorization denied. Invalid token' });
+    return res.status(401).json({ message: 'Authorization denied. Invalid token or token expired' });
   }
 };
 

@@ -1,4 +1,9 @@
 const Excel = require('exceljs');
+const JobListing = require('../models/Jobs');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }).single('excelFile'); // 'excelFile' is the name of the file field in the form
+
 
 const generateExcel = async (req, res, Model) => {
   try {
@@ -44,6 +49,70 @@ const generateExcel = async (req, res, Model) => {
   }
 };
 
+const uploadExcel = async (req, res) => {
+  try {
+    // Check if a file was uploaded
+    if (!req.files.file) {
+      return res.status(400).json({ error: 'No file was uploaded' });
+    }
+
+    // Load the uploaded Excel file
+    const workbook = new Excel.Workbook();
+    const arrayBuffer = req.files.file.data;
+
+    await workbook.xlsx.load(arrayBuffer);
+
+    // Assuming the first worksheet contains job listings
+    const worksheet = workbook.getWorksheet(1); // Assuming the first worksheet
+    const jobListings = [];
+
+    // Mapping of Excel headers to jobListingData properties
+    const headerMap = {
+      Title: 'title',
+      Description: 'description',
+      Requirements: 'requirements',
+      Sector: 'sector',
+      Industry: 'industry',
+      Salary: 'salary',
+      Country: 'country',
+      'Company Name': 'companyName',
+      Region: 'region',
+      Reference: 'reference',
+      'Expire Date': 'expireDate',
+      'Web Link': 'webLink'
+      // Add more headers and corresponding properties as needed
+    };
+
+    worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
+      if (rowNumber === 1) { // Header row
+        // Do nothing for now, as we are handling the headers separately
+      } else {
+        const jobListingData = {};
+
+        // Map each header to its corresponding property in jobListingData
+        row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+          const header = worksheet.getRow(1).getCell(colNumber).value.toString();
+          const property = headerMap[header];
+          if (property) {
+            jobListingData[property] = cell.value;
+          }
+        });
+
+        const newJobListing = new JobListing(jobListingData);
+        await newJobListing.save();
+        jobListings.push(newJobListing);
+      }
+    });
+
+    res.status(200).json({ message: 'Excel file uploaded successfully', jobListings });
+  } catch (error) {
+    console.error('Error uploading Excel file:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
   generateExcel,
+  uploadExcel
 };

@@ -1,13 +1,14 @@
-// models/User.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['user', 'admin'], default: 'user' },
-  preferences: [String],
-  skills: [String],
+  hashedPassword: { type: String, required: true }, // Store hashed passwords
+  preferences: [String], // General preferences
+  skills: [{
+    skill: { type: mongoose.Schema.Types.ObjectId, ref: 'Skill' }, // Reference to Skill schema
+    proficiency: { type: Number, min: 1, max: 5 } // Represent proficiency on a scale (e.g., 1-5)
+  }],
   experience: [{
     title: String,
     company: String,
@@ -24,10 +25,20 @@ const userSchema = new mongoose.Schema({
     endDate: Date
   }],
   location: String,
-  resume: String,
+  country: String,
+  region: String,
+  resume: { type: mongoose.Schema.Types.ObjectId, ref: 'Resume' }, // Reference to Resume schema
+  sector: { type: mongoose.Schema.Types.ObjectId, ref: 'Sector' }, // Reference to Sector schema
+  isActive: { type: Boolean, default: true }, // Added isActive field for user status
+  isPaid: { type: Boolean, default: false }, // Added isPaid field for paid status
+  interactionHistory: [{
+    jobMatched: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' }, // Reference to matched job
+    interactionDate: { type: Date, default: Date.now }, // Date of interaction
+    outcome: String, // Outcome of interaction (e.g., Interview Scheduled, Rejected)
+    feedback: String // User feedback on job match
+  }],
   createdAt: { type: Date, default: Date.now },
-  metaData: {type:Object}
-
+  metaData: { type: Object }
 });
 
 module.exports = mongoose.model('User', userSchema);

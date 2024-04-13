@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const jobsController = require('../controllers/jobsController');
-const authMiddleware = require('../middleware/authMiddleware');
 const excelController = require('../controllers/excelController'); // Import the controller for Excel file generation
+const authMiddleware = require('../middleware/authMiddleware');
 
 const permissions = {
     createJob: ['create_job'],
@@ -26,5 +26,8 @@ router.get('/list', authMiddleware.authenticatePartner(permissions.listJobs), jo
 
 // Route for downloading Excel file of all job listings
 router.get('/download-excel', authMiddleware.authenticatePartner(permissions.downloadExcel),  jobsController.downloadExcel); // Create a new endpoint for downloading Excel
+
+router.post('/upload-excel', authMiddleware.authenticatePartner(permissions.uploadExcel), excelController.uploadExcel); // New route for uploading Excel
+
 
 module.exports = router;

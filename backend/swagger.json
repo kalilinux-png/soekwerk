@@ -228,6 +228,9 @@
                 },
                 "accessControl": {
                   "example": "any"
+                },
+                "staffCode": {
+                  "example": "any"
                 }
               }
             }
@@ -717,6 +720,35 @@
         }
       }
     },
+    "/api/jobs/upload-excel": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/jobFiles/": {
       "post": {
         "description": "",
@@ -894,6 +926,239 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/user/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "preferences": {
+                  "example": "any"
+                },
+                "skills": {
+                  "example": "any"
+                },
+                "experience": {
+                  "example": "any"
+                },
+                "education": {
+                  "example": "any"
+                },
+                "location": {
+                  "example": "any"
+                },
+                "country": {
+                  "example": "any"
+                },
+                "region": {
+                  "example": "any"
+                },
+                "resume": {
+                  "example": "any"
+                },
+                "sector": {
+                  "example": "any"
+                },
+                "metaData": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/user/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "hashedPassword": {
+                  "example": "any"
+                },
+                "preferences": {
+                  "example": "any"
+                },
+                "skills": {
+                  "example": "any"
+                },
+                "experience": {
+                  "example": "any"
+                },
+                "education": {
+                  "example": "any"
+                },
+                "location": {
+                  "example": "any"
+                },
+                "country": {
+                  "example": "any"
+                },
+                "region": {
+                  "example": "any"
+                },
+                "resume": {
+                  "example": "any"
+                },
+                "sector": {
+                  "example": "any"
+                },
+                "isActive": {
+                  "example": "any"
+                },
+                "isPaid": {
+                  "example": "any"
+                },
+                "interactionHistory": {
+                  "example": "any"
+                },
+                "metaData": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
