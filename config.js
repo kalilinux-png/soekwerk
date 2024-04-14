@@ -1,0 +1,9 @@
+// config.js
+
+const base_url = process.env.NODE_ENV === 'production' ? 'https://production.url' : 'http://localhost:8000';
+const api_key = process.env.API_KEY || 'default_api_key';
+
+module.exports = {
+  base_url,
+  api_key,
+};
