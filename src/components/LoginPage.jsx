@@ -1,40 +1,54 @@
-import React, { useState } from 'react'
-import loginImg from "../assets/images/soekwerk.jpeg"
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'; // Importing useDispatch hook
+import { login } from '../actions/authActions'; // Importing the login action creator
+import loginImg from "../assets/images/soekwerk.jpeg";
 import "./LoginPage.css"
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import validateLogin from '../validations/login';
-import { login } from "../redux/actions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const { logins, handleSubmit } = useForm();
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState({});
-  const loginState = useSelector((state) => state.Login);
+  const dispatch = useDispatch(); // Initializing useDispatch hook
   const history = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setForm((prevState) => ({
+    const { name, value } = e.target;
+    setForm(prevState => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [name]: value
     }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const { errors, isValid } = validateLogin(form);
+    console.log("form after submit", form); // Log the updated form state
+    console.log("errors", errors, isValid);
     if (isValid) {
       setError("");
-      dispatch(
-        login({
-          form,
-          callback: () => {
-            history("/dashboard");
-          },
+      dispatch(login(form)) // Dispatching login action
+        .then((response) => {
+          // Assuming the JWT token is returned in the response
+          console.log("login response", response)
+          const token = response.token;
+          // Store the token in local storage
+          localStorage.setItem('token', token);
+          localStorage.setItem('email', form.email);
+          // Redirect to the dashboard page
+          history('/create_listing');
         })
-      );
+        .catch((error) => {
+          console.log("login error", error)
+          toast.error(`Login Failed ${error}`, {
+            position: "top-right"
+          });
+          setError(error); // Assuming there's an error message in the response
+        });
     } else {
       setError(errors);
     }
@@ -53,18 +67,20 @@ const LoginPage = () => {
             <form action="submit" className="max-w-[350px] flex flex-col gap-8 mt-8">
               <input
                 type="text"
+                name="email"
                 className="border placeholder:text-[#000] placeholder:text-[0.9rem] px-5 py-2.5 rounded-md"
                 placeholder="Email Address"
-                 onChange={handleChange}
+                onChange={handleChange}
               />
               <input
                 type="password"
+                name="password"
                 className="border placeholder:text-[#000] placeholder:text-[0.9rem] px-5 py-2.5 rounded-md"
                 placeholder="Password"
-                 onChange={handleChange}
+                onChange={handleChange}
               />
 
-              <button  onClick={ (e) => onSubmit(e)} className="uppercase font-bold bg-[#fbbc41] rounded-md text-[1.25rem] py-2 shadow-[0px_0px_10px_4px_#78b172]">Login</button>
+              <button onClick={(e) => onSubmit(e)} className="uppercase font-bold bg-[#fbbc41] rounded-md text-[1.25rem] py-2 shadow-[0px_0px_10px_4px_#78b172]">Login</button>
             </form>
 
             <p className="Capitalize my-4 text-left">Forget Password- ? <span className="font-bold">Click here</span></p>
@@ -79,4 +95,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default LoginPage;

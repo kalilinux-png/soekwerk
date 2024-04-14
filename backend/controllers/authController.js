@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const register = async (req, res) => {
   try {
     // Extract user data from request body
-    const { name, email, password,staffCode } = req.body;
+    const { name, email, password, staffCode } = req.body;
 
     // Check if user with the same email already exists
     let user = await User.findOne({ email });
@@ -68,7 +68,13 @@ const login = async (req, res) => {
       permissions: user?.accessControl  // Assuming 'permissions' is a field in your User or Partner schema
     }, process.env.JWT_SECRET, { expiresIn: '1h' });
     // Set the JWT token as a cookie in the response
-    res.cookie('Authorization', token, { httpOnly: true, expires: new Date(Date.now() + 3600000) }); // Cookie expires in 1 hour
+    res.cookie('Authorization', token, {
+      expires: new Date(Date.now() + 3600000), domain: req.hostname,
+      sameSite: "None",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production' ? true : true,
+    }); // Cookie expires in 1 hour
+ 
     // Return success response with token
     res.json({ token });
   } catch (error) {

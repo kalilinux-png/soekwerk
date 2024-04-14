@@ -43,10 +43,14 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+app.use(cors({
+    origin: true,
+    credentials: true,
+  }));
+
 app.use(cookieParser())
 app.use(fileUpload());
 app.use(express.json()); // cookies parser
-app.use(cors());
 app.use(logRequests)
 // Routes 
 app.use('/api/auth', authRoutes);

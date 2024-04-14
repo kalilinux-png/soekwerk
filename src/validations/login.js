@@ -3,7 +3,7 @@ import validator from "validator";
 function validateLogin(data) {
   const errors = {};
 
-  if (validator.isEmpty(data.username.trim()))
+  if (validator.isEmpty(data.email.trim()))
     errors.username = "Please enter your username.";
   // else if (!validator(data.email))
   //   errors.username = "Please enter a valid username.";

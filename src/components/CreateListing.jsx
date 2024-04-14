@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import AgentDetails from './AgentDetails'
 import { PiUploadBold } from "react-icons/pi";
-
+import { fetchJobs} from "../actions/jobActions"
+import { useDispatch } from 'react-redux';
 
 const CreateListing = () => {
+  const dispatch = useDispatch(); // Initializing useDispatch hook
+  dispatch(fetchJobs())
   const [fileName, setFileName] = useState('');
 
   const handleFileChange = (event) => {
@@ -69,7 +72,7 @@ const CreateListing = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <label className='uppercase text-[1rem] font-semibold '>Upload File</label>
-            <form class="max-w-sm relative">
+            <form className="max-w-sm relative">
               <label htmlFor="file-input" className="w-full inline-flex items-center px-4 py-2 bg-[#fff] border border-gray-200 shadow-sm rounded-lg text-sm cursor-pointer hover:bg-gray-300 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:border-blue-500 focus-within:ring-1 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                 <PiUploadBold className="h-6 w-6 mr-2" />
               </label>
