@@ -47,7 +47,6 @@ app.use(cors({
     origin: true,
     credentials: true,
   }));
-
 app.use(cookieParser())
 app.use(fileUpload());
 app.use(express.json()); // cookies parser

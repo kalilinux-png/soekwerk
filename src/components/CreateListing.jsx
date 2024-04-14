@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AgentDetails from './AgentDetails'
 import { PiUploadBold } from "react-icons/pi";
-import { fetchJobs} from "../actions/jobActions"
-import { useDispatch } from 'react-redux';
+import { fetchJobs } from "../actions/jobActions"
+import { useSelector, useDispatch } from 'react-redux';
 
 const CreateListing = () => {
   const dispatch = useDispatch(); // Initializing useDispatch hook
-  dispatch(fetchJobs())
-  const [fileName, setFileName] = useState('');
+  // useEffect(()=> { 
+    dispatch(fetchJobs());
 
+  // },[])
+  const [fileName, setFileName] = useState('');
+  const jobs = useSelector((state) => state.jobs);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -111,8 +114,21 @@ const CreateListing = () => {
 
           <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#917dcd]'>Download Excel</button>
         </div>
+        <div className="job-listings">
+          <h2 className="text-2xl font-semibold mb-4">Jobs</h2>
+          <div className="grid grid-cols-4 gap-3">
+            {jobs.map((job) => (
+              <div key={job.id} className="job-item">
+                <p>Vacancy Name: {job.vacancyName}</p>
+                <p>Company Name: {job.companyName}</p>
+                <p>Expiry Date: {job.expiryDate}</p>
+                {/* Add more job details as needed */}
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <div className='h-[62vh] overflow-auto'>
+        {/* <div className='h-[62vh] overflow-auto'>
           <table className='w-full my-8'>
             <thead className='border-b-2 border-[#000]'>
               <tr>
@@ -178,7 +194,7 @@ const CreateListing = () => {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 // store.js
 
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'; // If using redux-thunk middleware
+import { thunk } from 'redux-thunk'; // If using redux-thunk middleware
 import rootReducer from './reducers'; // Import the root reducer or individual reducers
 
 // Apply middleware if needed (e.g., redux-thunk)
@@ -13,4 +13,4 @@ const store = createStore(
   applyMiddleware(...middleware) // Apply middleware to the store
 );
 
-export default store;
+export default store
