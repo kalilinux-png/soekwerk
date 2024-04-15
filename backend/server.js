@@ -44,9 +44,10 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors({
-    origin: ['https://soekwerk.onrender.com/','http://localhost:3000'],    
+    origin: "*",
     credentials: true,
-  }));
+    optionSuccessStatus: 200,
+}));
 app.use(cookieParser())
 app.use(fileUpload());
 app.use(express.json()); // cookies parser

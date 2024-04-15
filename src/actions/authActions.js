@@ -18,7 +18,7 @@ const LOGOUT = 'LOGOUT';
 export const login = (credentials) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
-    const response = (await axios.post(endpoints.auth.login, credentials))?.data;
+    const response = (await axios.post(endpoints.auth.login, credentials, { withCredentials: true }))?.data;
     dispatch({ type: LOGIN_SUCCESS, payload: response.token });
     return response.token
 
