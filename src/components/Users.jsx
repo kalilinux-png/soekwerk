@@ -2,6 +2,7 @@ import React from 'react'
 import AgentDetails from './AgentDetails'
 
 const Users = () => {
+  
   return (
     <div className="w-full max-w-[1150px] mx-auto px-8">
       <AgentDetails />

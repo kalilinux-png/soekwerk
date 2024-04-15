@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import AgentDetails from './AgentDetails'
 import { PiUploadBold } from "react-icons/pi";
-import { fetchJobs } from "../actions/jobActions"
+import { fetchJobs,downloadExcel } from "../actions/jobActions"
 import { useSelector, useDispatch } from 'react-redux';
+import dayjs from 'dayjs'; // Import dayjs library
 
 const CreateListing = () => {
   const dispatch = useDispatch(); // Initializing useDispatch hook
-  // useEffect(()=> { 
+  useEffect(() => {
     dispatch(fetchJobs());
 
-  // },[])
+  }, [dispatch])
   const [fileName, setFileName] = useState('');
-  const jobs = useSelector((state) => state.jobs);
+  const jobsState = useSelector((state) => state.jobs.jobList);
+  console.log("state", jobsState);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -112,25 +114,13 @@ const CreateListing = () => {
 
           <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#1ea52b]'>Search</button>
 
-          <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#917dcd]'>Download Excel</button>
-        </div>
-        <div className="job-listings">
-          <h2 className="text-2xl font-semibold mb-4">Jobs</h2>
-          <div className="grid grid-cols-4 gap-3">
-            {jobs.map((job) => (
-              <div key={job.id} className="job-item">
-                <p>Vacancy Name: {job.vacancyName}</p>
-                <p>Company Name: {job.companyName}</p>
-                <p>Expiry Date: {job.expiryDate}</p>
-                {/* Add more job details as needed */}
-              </div>
-            ))}
-          </div>
+          <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#917dcd]' onClick={()=>{console.log("butonclick");downloadExcel()}}>Download Excel</button>
         </div>
 
-        {/* <div className='h-[62vh] overflow-auto'>
+        <div className='h-[62vh] overflow-auto'>
           <table className='w-full my-8'>
             <thead className='border-b-2 border-[#000]'>
+
               <tr>
                 <th className='text-nowrap py-4 px-7 uppercase'>sub. Date</th>
                 <th className='text-nowrap py-4 px-7 uppercase'>Vacancy </th>
@@ -139,62 +129,30 @@ const CreateListing = () => {
                 <th className='text-nowrap py-4 px-7 uppercase'>Region</th>
                 <th className='text-nowrap py-4 px-7 uppercase'>Reference</th>
                 <th className='text-nowrap py-4 px-7 uppercase'>exp date</th>
-                <th className='text-nowrap py-4 px-7 uppercase'>history</th>
+                <th className='text-nowrap py-4 px-7 uppercase'>Link</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr className='text-center'>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB-24</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>86021566968</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>ENABLED</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>7300</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>KHOMAS</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>SW002/JA12</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB -22</td>
-                <td className='py-4 text-nowrap px-2 uppercase'>
-                  <button className='w-full max-w-[150px] text-[#fff] text-[0.8rem] font-semibold rounded-md py-1 uppercase bg-[#1ea52B]'>Link</button>
-                </td>
-              </tr>
-              <tr className='text-center'>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB-24</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>86021566968</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>ENABLED</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>7300</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>KHOMAS</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>SW002/JA12</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB -22</td>
-                <td className='py-4 text-nowrap px-2 uppercase'>
-                  <button className='w-full max-w-[150px] text-[#fff] text-[0.8rem] font-semibold rounded-md py-1 uppercase bg-[#1ea52B]'>Link</button>
-                </td>
-              </tr>
-              <tr className='text-center'>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB-24</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>86021566968</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>ENABLED</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>7300</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>KHOMAS</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>SW002/JA12</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB -22</td>
-                <td className='py-4 text-nowrap px-2 uppercase'>
-                  <button className='w-full max-w-[150px] text-[#fff] text-[0.8rem] font-semibold rounded-md py-1 uppercase bg-[#1ea52B]'>Link</button>
-                </td>
-              </tr>
-              <tr className='text-center'>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB-24</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>86021566968</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>ENABLED</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>7300</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>KHOMAS</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>SW002/JA12</td>
-                <td className='py-4 font-medium text-nowrap px-7 uppercase'>02-FEB -22</td>
-                <td className='py-4 text-nowrap px-2 uppercase'>
-                  <button className='w-full max-w-[150px] text-[#fff] text-[0.8rem] font-semibold rounded-md py-1 uppercase bg-[#1ea52B]'>Link</button>
-                </td>
-              </tr>
+            {/* // Render function */}
+              {jobsState.map((job) => (
+                <tr className='text-center' key={job.id}>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{dayjs(job.createdAt).format('MMM DD, YYYY')}</td>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{job.title}</td>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{job.companyName}</td>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{job.country}</td>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{job.region}</td>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{job.reference}</td>
+                  <td className='py-4 font-medium text-nowrap px-7 uppercase'>{dayjs(job.expireDate).format('MMM DD, YYYY')}</td>
+                  <td className='py-4 text-nowrap px-2 uppercase'>
+                    <button className='w-full max-w-[150px] text-[#fff] text-[0.8rem] font-semibold rounded-md py-1 uppercase bg-[#1ea52B]' onClick={() => { window.open(job.webLink) }} >Link</button>
+                  </td>
+                </tr>
+              ))}
+
             </tbody>
           </table>
-        </div> */}
+        </div>
       </div>
     </div>
   )

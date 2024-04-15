@@ -30,8 +30,8 @@ export const fetchJobs = () => async (dispatch) => {
   dispatch({ type: FETCH_JOBS_REQUEST });
   try {
     const response = await axios.get(endpoints.jobs.list, { withCredentials: true });
-    console.log("jobs response", response.data)
-    dispatch({ type: FETCH_JOBS_SUCCESS, payload: response.data });
+    console.log("jobs response", response.data.jobListings)
+    dispatch({ type: FETCH_JOBS_SUCCESS, payload: response.data.jobListings });
   } catch (error) {
     dispatch({ type: FETCH_JOBS_FAILURE, payload: error.message });
   }
@@ -64,5 +64,34 @@ export const deleteJob = (jobId) => async (dispatch) => {
     dispatch({ type: DELETE_JOB_SUCCESS, payload: jobId });
   } catch (error) {
     dispatch({ type: DELETE_JOB_FAILURE, payload: error.message });
+  }
+};
+
+export const downloadExcel = async () => {
+  try {
+    const response = await axios.get(endpoints.jobs.downloadExcel, {
+      responseType: 'blob', // Set response type to 'blob' to handle binary data
+      withCredentials: true
+    });
+
+    // Create a blob object from the response data
+    const blob = new Blob([response.data], { type: response.headers['content-type'] });
+
+    // Create a temporary URL for the blob object
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a link element to trigger the download
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'jobs.xlsx'); // Set the filename for the downloaded file
+
+    // Append the link to the document body and click it to trigger the download
+    document.body.appendChild(link);
+    link.click();
+
+    // Remove the link from the document body
+    document.body.removeChild(link);
+  } catch (error) {
+    console.log("excel download error", error);
   }
 };

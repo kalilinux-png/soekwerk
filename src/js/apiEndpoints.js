@@ -1,8 +1,13 @@
 // apiEndpoints.js
 
+import axios from 'axios';
 console.log("process.env.REACT_APP_ENV", process.env.REACT_APP_ENV)
 const API_BASE_URL = process.env.REACT_APP_ENV === 'production' ? 'https://soekwerk.onrender.com' : 'http://localhost:5000'; // Update with your actual API base URL
 console.log("Api base url", API_BASE_URL)
+
+
+// Set default axios configuration
+axios.defaults.withCredentials = true;
 
 const endpoints = {
   auth: {
@@ -54,4 +59,5 @@ const endpoints = {
   },
 };
 
-module.exports = endpoints;
+// Export the Axios instance and endpoints
+export default  endpoints
