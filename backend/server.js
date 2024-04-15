@@ -43,11 +43,25 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors({
-    origin: "*",
-    credentials: true,
-    optionSuccessStatus: 200,
-}));
+// CORS middleware
+app.use((req, res, next) => {
+    const allowedOrigins = ['https://soekwerk-beryl.vercel.app', 'http://localhost:3000'];
+    const origin = req.headers.origin;
+  
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+    res.status(200).end();
+});
+
 app.use(cookieParser())
 app.use(fileUpload());
 app.use(express.json()); // cookies parser
