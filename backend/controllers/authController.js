@@ -72,8 +72,15 @@ const login = async (req, res) => {
       expires: new Date(Date.now() + 3600000), domain: req.hostname,
       sameSite: "None",
       httpOnly: true,
-      secure: true,
+      secure:  process.env.NODE_ENV === 'production' ? true : true,
     }); // Cookie expires in 1 hour
+
+    // {
+    //   expires: new Date(Date.now() + 3600000), domain: req.hostname,
+    //   sameSite: "None",
+    //   httpOnly: true,
+    //   secure:
+    // }
 
     // Return success response with token
     res.json({ token });
