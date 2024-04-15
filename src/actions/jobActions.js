@@ -95,3 +95,14 @@ export const downloadExcel = async () => {
     console.log("excel download error", error);
   }
 };
+
+export const uploadExcel = async (formData) => { 
+  try {
+    const response = await axios.post(endpoints.jobs.uploadExcel, formData,{headers:{ 'Content-Type': 'multipart/form-data',}});
+    return response.data
+
+  } catch (error) {
+    console.log("Error during Excel Upload",error)
+  }
+
+}

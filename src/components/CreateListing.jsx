@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import AgentDetails from './AgentDetails'
-import { PiUploadBold } from "react-icons/pi";
-import { fetchJobs,downloadExcel } from "../actions/jobActions"
+import { fetchJobs, downloadExcel } from "../actions/jobActions"
 import { useSelector, useDispatch } from 'react-redux';
+import ExcelUploader from '../Pages/ExcelUpload';
 import dayjs from 'dayjs'; // Import dayjs library
 
 const CreateListing = () => {
@@ -76,14 +76,7 @@ const CreateListing = () => {
             </select>
           </div>
           <div className='flex flex-col justify-between'>
-            <label className='uppercase text-[1rem] font-semibold '>Upload File</label>
-            <form className="max-w-sm relative">
-              <label htmlFor="file-input" className="w-full inline-flex items-center px-4 py-2 bg-[#fff] border border-gray-200 shadow-sm rounded-lg text-sm cursor-pointer hover:bg-gray-300 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:border-blue-500 focus-within:ring-1 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
-                <PiUploadBold className="h-6 w-6 mr-2" />
-              </label>
-              <input type="file" name="file-input" id="file-input" className="hidden" onChange={handleFileChange} />
-              {fileName && <span className='absolute top-2.5 lg:left-[30%] lg:text-[0.7rem]'>{fileName}</span>}
-            </form>
+
 
           </div>
           <div className='flex flex-col'>
@@ -93,6 +86,8 @@ const CreateListing = () => {
           <div className='flex flex-col justify-end'>
             <button className='py-1.5 px-14 mt-2 rounded-md text-[1.2rem] text-[#fff]  font-bold bg-[#9ad19f]'>Create</button>
           </div>
+          <ExcelUploader />
+
         </div>
       </div>
 
@@ -114,7 +109,7 @@ const CreateListing = () => {
 
           <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#1ea52b]'>Search</button>
 
-          <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#917dcd]' onClick={()=>{console.log("butonclick");downloadExcel()}}>Download Excel</button>
+          <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#917dcd]' onClick={() => { console.log("butonclick"); downloadExcel() }}>Download Excel</button>
         </div>
 
         <div className='h-[62vh] overflow-auto'>
@@ -134,7 +129,7 @@ const CreateListing = () => {
             </thead>
 
             <tbody>
-            {/* // Render function */}
+              {/* // Render function */}
               {jobsState.map((job) => (
                 <tr className='text-center' key={job.id}>
                   <td className='py-4 font-medium text-nowrap px-7 uppercase'>{dayjs(job.createdAt).format('MMM DD, YYYY')}</td>
