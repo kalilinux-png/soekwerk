@@ -15,6 +15,7 @@ const Users = () => {
   const [searchReference, setSearchReference] = useState('');
 
   const usersList = useSelector((state) => state.users.userList); // Select usersList directly
+  console.log("userList",usersList)
   // Calculate total, active, and inactive users
   const totalUsers = usersList.length;
   const activeUsers = usersList.filter(user => user.isActive === true).length;

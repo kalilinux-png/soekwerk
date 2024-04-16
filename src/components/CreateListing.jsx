@@ -11,17 +11,30 @@ const CreateListing = () => {
     dispatch(fetchJobs());
 
   }, [dispatch])
-  const [fileName, setFileName] = useState('');
+  const [searchCriteria, setSearchCriteria] = useState('');
+  const [searchReference, setSearchReference] = useState('');
   const jobsState = useSelector((state) => state.jobs.jobList);
-  console.log("state", jobsState);
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setFileName(file.name);
-    } else {
-      setFileName('');
+
+  const filteredJobs = jobsState.filter((job) => {
+    console.log("job", job, searchCriteria, searchReference)
+    if (searchCriteria === 'sub. Date') {
+      return dayjs(job.createdAt).format('MMM DD, YYYY').toLowerCase().includes(searchReference.toLowerCase());
+    } else if (searchCriteria === 'Vacancy') {
+      return job?.title?.toLowerCase().includes(searchReference?.toLowerCase());
+    } else if (searchCriteria === 'Company') {
+      return job?.companyName?.toLowerCase().includes(searchReference?.toLowerCase());
+    } else if (searchCriteria === 'Country') {
+      return job?.country?.toLowerCase().includes(searchReference?.toLowerCase());
+    } else if (searchCriteria === 'Region') {
+      return job?.region?.toLowerCase().includes(searchReference?.toLowerCase());
+    } else if (searchCriteria === 'Reference') {
+      return job?.reference?.toLowerCase().includes(searchReference?.toLowerCase());
+    } else if (searchCriteria === 'exp date') {
+      return dayjs(job.expireDate).format('MMM DD, YYYY').toLowerCase().includes(searchReference.toLowerCase());
     }
-  };
+    // Add other search criteria here
+    return true;
+  });
 
   return (
     <div className="w-full max-w-[1150px] mx-auto px-8">
@@ -95,17 +108,33 @@ const CreateListing = () => {
         <div className="search flex items-center justify-between gap-3 border-b-2 border-[#000] py-8">
           <div className="w-full max-w-[20rem] field flex flex-col">
             <label className='text-[0.9rem] font-bold' htmlFor="">Search Criteria</label>
-            <select className='py-2 px-3 mt-2 rounded-md' name="search-criteria" id="">
-              <option value="">vxkj</option>
-              <option value="">sdf</option>
-              <option value="">fggbf</option>
+            <select
+              className='py-2 px-3 mt-2 rounded-md'
+              name="search-criteria"
+              id="search-criteria"
+              value={searchCriteria}
+              onChange={(e) => setSearchCriteria(e.target.value)}
+            >
+              <option value="sub. Date">sub. Date</option>
+              <option value="Vacancy">Vacancy</option>
+              <option value="Company">Company</option>
+              <option value="Country">Country</option>
+              <option value="Region">Region</option>
+              <option value="Reference">Reference</option>
+              <option value="exp date">exp date</option>
+              {/* Add other search criteria options here */}
             </select>
           </div>
 
           <div className="w-full max-w-[20rem] field flex flex-col">
             <label className='text-[0.9rem] font-bold' htmlFor="">Search Reference</label>
-            <input className='py-2 px-3 mt-2 rounded-md' type="search" placeholder='Type Reference' name="" id="" />
-          </div>
+            <input
+              className='py-2 px-3 mt-2 rounded-md'
+              type="search"
+              placeholder='Type Reference'
+              value={searchReference}
+              onChange={(e) => setSearchReference(e.target.value)}
+            />          </div>
 
           <button className='py-1.5 px-2 w-full max-w-[200px] mt-2 rounded-md text-[1.1rem] text-[#fff] mb-[-1.15rem] font-semibold bg-[#1ea52b]'>Search</button>
 
@@ -130,7 +159,7 @@ const CreateListing = () => {
 
             <tbody>
               {/* // Render function */}
-              {jobsState.map((job) => (
+              {filteredJobs.map((job) => (
                 <tr className='text-center' key={job.id}>
                   <td className='py-4 font-medium text-nowrap px-7 uppercase'>{dayjs(job.createdAt).format('MMM DD, YYYY')}</td>
                   <td className='py-4 font-medium text-nowrap px-7 uppercase'>{job.title}</td>
