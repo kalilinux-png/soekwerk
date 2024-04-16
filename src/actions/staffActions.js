@@ -1,7 +1,7 @@
 // actions/staffActions.js
 
 import axios from 'axios';
-import endpoints from './apiEndpoints'; // Import endpoints from apiEndpoints.js
+import endpoints from '../js/apiEndpoints'; // Import endpoints from apiEndpoints.js
 
 // Action types
 export const FETCH_STAFF_REQUEST = 'FETCH_STAFF_REQUEST';

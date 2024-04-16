@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AgentDetails from './AgentDetails'
+import { fetchStaff } from "../actions/staffActions"
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const ProfileSetting = () => {
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchStaff())
+  }, [dispatch])
+
+  const staffData = useSelector((state) => state.staff.staffList);
+
+  console.log("Staff Data", staffData)
+  const currentUser = staffData.filter((user) => {
+    if(user.email === window.localStorage.email) { 
+      return user
+    }
+  })
+  const user = currentUser[0]
   return (
     <div className="w-full max-w-[1150px] mx-auto px-8">
-      <AgentDetails/>
+      <AgentDetails />
 
       <div>
         <h1 className="text-[#392e2d] text-[clamp(2rem,5vw,5rem)] text-left uppercase font-extrabold py-5 border-b-2 border-[#000]">
@@ -14,19 +32,19 @@ const ProfileSetting = () => {
         <div className="profile-detail flex flex-col gap-4 max-w-[70%] py-6 border-b-2 border-[#000]">
           <div className="flex items-center justify-between text-left">
             <span className="w-[50%] font-bold">Name</span>
-            <span className="w-[50%]">LLEWELLYN</span>
+            <span className="w-[50%]">{user.name}</span>
           </div>
-          <div className="flex items-center justify-between text-left">
+          {/* <div className="flex items-center justify-between text-left">
             <span className="w-[50%] font-bold">SURNAME</span>
-            <span className="w-[50%]">MOTINGA</span>
-          </div>
+            <span className="w-[50%]">{l</span>
+          </div> */}
           <div className="flex items-center justify-between text-left">
             <span className="w-[50%] font-bold">EMAIL ADDRESS</span>
-            <span className="w-[50%]">abcdxyz@xyz.com</span>
+            <span className="w-[50%]">{user.email}</span>
           </div>
           <div className="flex items-center justify-between text-left">
             <span className="w-[50%] font-bold">MOBILE NUMBER</span>
-            <span className="w-[50%]">+264 81 808 3704</span>
+            <span className="w-[50%]">{user?.mobile || "No Mobile Number Found"}</span>
           </div>
         </div>
       </div>

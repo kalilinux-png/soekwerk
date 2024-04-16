@@ -10,20 +10,20 @@ const initialState = {
   // Reducer function for the staff slice
   const staffReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'STAFF_FETCH_REQUEST':
+      case 'FETCH_STAFF_REQUEST':
         return {
           ...state,
           loading: true,
           error: null,
         };
-      case 'STAFF_FETCH_SUCCESS':
+      case 'FETCH_STAFF_SUCCESS':
         return {
           ...state,
           staffList: action.payload,
           loading: false,
           error: null,
         };
-      case 'STAFF_FETCH_FAILURE':
+      case 'FETCH_STAFF_FAILURE':
         return {
           ...state,
           loading: false,
