@@ -23,15 +23,15 @@ const AgentDetails = () => {
     <div className="agent-details flex items-center justify-between gap-14 py-6 border-b-2 border-[#000]">
       <div className="uppercase text-[1.2rem]">
         Agent Code:{" "}
-        <span className="text-[#c85e22] font-semibold">{user.staffCode}</span>
+        <span className="text-[#c85e22] font-semibold">{user?.staffCode}</span>
       </div>
       <div className="uppercase text-[1.2rem]">
         Agent Code:{" "}
-        <span className="text-[#c85e22] font-semibold">{user.staffCode}</span>
+        <span className="text-[#c85e22] font-semibold">{user?.staffCode}</span>
       </div>
       <div className="uppercase text-[1.2rem]">
         Agent Code:{" "}
-        <span className="text-[#c85e22] font-semibold">{user.staffCode}</span>
+        <span className="text-[#c85e22] font-semibold">{user?.staffCode}</span>
       </div>
     </div>
   )
