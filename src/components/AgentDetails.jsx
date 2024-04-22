@@ -11,7 +11,7 @@ const AgentDetails = () => {
 
   const staffData = useSelector((state) => state.staff.staffList);
 
-  console.log("Staff Data", staffData)
+  // console.log("Staff Data", staffData)
   const currentUser = staffData.filter((user) => {
     if(user.email === window.localStorage.email) { 
       return user

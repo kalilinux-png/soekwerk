@@ -30,7 +30,7 @@ export const fetchJobs = () => async (dispatch) => {
   dispatch({ type: FETCH_JOBS_REQUEST });
   try {
     const response = await axios.get(endpoints.jobs.list, { withCredentials: true });
-    console.log("jobs response", response.data.jobListings)
+    // console.log("jobs response", response.data.jobListings)
     dispatch({ type: FETCH_JOBS_SUCCESS, payload: response.data.jobListings });
   } catch (error) {
     dispatch({ type: FETCH_JOBS_FAILURE, payload: error.message });

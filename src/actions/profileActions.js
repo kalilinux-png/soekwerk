@@ -1,7 +1,7 @@
 // actions/profileActions.js
 
 import axios from 'axios';
-import endpoints from './apiEndpoints'; // Import endpoints from apiEndpoints.js
+import endpoints from '../js/apiEndpoints'; // Import endpoints from apiEndpoints.js
 
 // Action types
 export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
@@ -32,6 +32,9 @@ export const updatePassword = (token, passwordData) => async (dispatch) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: response.data });
+
+    console.log("response.data");
+    console.log(response.data);
   } catch (error) {
     dispatch({ type: UPDATE_PASSWORD_FAILURE, payload: error.message });
   }

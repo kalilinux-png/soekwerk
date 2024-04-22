@@ -8,7 +8,7 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
-      <div className="flex mt-[9.4rem]">
+      <div className="flex mt-[13.3rem]">
         <div className="h-auto md:h-[100vh] border-r border-[#ccc] px-0">
           <Sidebar />
         </div>

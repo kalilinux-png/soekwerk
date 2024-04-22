@@ -16,7 +16,7 @@ const CreateListing = () => {
   const jobsState = useSelector((state) => state.jobs.jobList);
 
   const filteredJobs = jobsState.filter((job) => {
-    console.log("job", job, searchCriteria, searchReference)
+    // console.log("job", job, searchCriteria, searchReference)
     if (searchCriteria === 'sub. Date') {
       return dayjs(job.createdAt).format('MMM DD, YYYY').toLowerCase().includes(searchReference.toLowerCase());
     } else if (searchCriteria === 'Vacancy') {
