@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AgentDetails from './AgentDetails'
-import { fetchJobs, downloadExcel } from "../actions/jobActions"
+import { fetchJobs, downloadExcel, addJob } from "../actions/jobActions"
 import { useSelector, useDispatch } from 'react-redux';
 import ExcelUploader from '../Pages/ExcelUpload';
 import dayjs from 'dayjs'; // Import dayjs library
@@ -11,6 +11,44 @@ const CreateListing = () => {
     dispatch(fetchJobs());
 
   }, [dispatch])
+
+  const [formData, setFormData] = useState({
+    title: '',
+    companyName: '',
+    expiryDate: '',
+    field: '',
+    country: '',
+    region: '',
+    city: '',
+    webLink: ''
+  });
+
+  const { title, description, companyName, expiryDate, field, country, region, city, webLink } = formData;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Dispatch action to add job with form data
+    dispatch(addJob(formData));
+    // Reset form after submission
+    setFormData({
+      title: '',
+      description: "",
+      companyName: '',
+      expiryDate: '',
+      field: '',
+      country: '',
+      region: '',
+      city: '',
+      webLink: ''
+    });
+    dispatch(fetchJobs());
+
+  }
+
   const [searchCriteria, setSearchCriteria] = useState('');
   const [searchReference, setSearchReference] = useState('');
   const jobsState = useSelector((state) => state.jobs.jobList);
@@ -42,66 +80,103 @@ const CreateListing = () => {
 
       <div className="users flex flex-col py-8">
         <h1 className='uppercase text-[1.6rem] font-bold underline my-8'>Create Listing</h1>
-
-        <div className="grid grid-cols-4 gap-3">
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Vacancy Name</label>
-            <input className='py-2 px-3 mt-2 rounded-md' type="text" name="" id="" />
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-4 gap-3">
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Vacancy Name</label>
+              <input
+                className='py-2 px-3 mt-2 rounded-md'
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Job Description </label>
+              <input
+                className='py-2 px-3 mt-2 rounded-md'
+                type="text"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Company Name</label>
+              <input
+                className='py-2 px-3 mt-2 rounded-md'
+                type="text"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Expiry Date</label>
+              <input
+                className='py-2 px-3 mt-2 rounded-md'
+                type="date"
+                name="expireDate"
+                value={formData.expiryDate}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Field</label>
+              <select
+                className='py-2 px-3 mt-2 rounded-md'
+                name="sector"
+                value={formData.field}
+                onChange={handleChange}
+              >
+                <option value="">vxkj</option>
+                <option value="">sdf</option>
+                <option value="">fggbf</option>
+              </select>
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Country</label>
+              <select
+                className='py-2 px-3 mt-2 rounded-md'
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+              >
+                <option value="">vxkj</option>
+                <option value="">sdf</option>
+                <option value="">fggbf</option>
+              </select>
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>City</label>
+              <select
+                className='py-2 px-3 mt-2 rounded-md'
+                name="region"
+                value={formData.city}
+                onChange={handleChange}
+              >
+                <option value="">vxkj</option>
+                <option value="">sdf</option>
+                <option value="">fggbf</option>
+              </select>
+            </div>
+            <div className='flex flex-col'>
+              <label className='uppercase text-[1rem] font-semibold'>Web Link</label>
+              <input
+                className='py-2 px-3 mt-2 rounded-md'
+                type="text"
+                name="webLink"
+                value={formData.webLink}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='flex flex-col justify-end'>
+              <button type="submit" className='py-1.5 px-14 mt-2 rounded-md text-[1.2rem] text-[#fff]  font-bold bg-[#9ad19f]'>Create</button>
+            </div>
+            <ExcelUploader />
           </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Company Name</label>
-            <input className='py-2 px-3 mt-2 rounded-md' type="text" name="" id="" />
-          </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Expiry Date</label>
-            <input className='py-2 px-3 mt-2 rounded-md' type="date" name="" id="" />
-          </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Field</label>
-            <select className='py-2 px-3 mt-2 rounded-md' name="search-criteria" id="">
-              <option value="">vxkj</option>
-              <option value="">sdf</option>
-              <option value="">fggbf</option>
-            </select>
-          </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Country</label>
-            <select className='py-2 px-3 mt-2 rounded-md' name="search-criteria" id="">
-              <option value="">vxkj</option>
-              <option value="">sdf</option>
-              <option value="">fggbf</option>
-            </select>
-          </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Region</label>
-            <select className='py-2 px-3 mt-2 rounded-md' name="search-criteria" id="">
-              <option value="">vxkj</option>
-              <option value="">sdf</option>
-              <option value="">fggbf</option>
-            </select>
-          </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>City</label>
-            <select className='py-2 px-3 mt-2 rounded-md' name="search-criteria" id="">
-              <option value="">vxkj</option>
-              <option value="">sdf</option>
-              <option value="">fggbf</option>
-            </select>
-          </div>
-          <div className='flex flex-col justify-between'>
-
-
-          </div>
-          <div className='flex flex-col'>
-            <label className='uppercase text-[1rem] font-semibold '>Web Link</label>
-            <input className='py-2 px-3 mt-2 rounded-md' type="text" name="" id="" />
-          </div>
-          <div className='flex flex-col justify-end'>
-            <button className='py-1.5 px-14 mt-2 rounded-md text-[1.2rem] text-[#fff]  font-bold bg-[#9ad19f]'>Create</button>
-          </div>
-          <ExcelUploader />
-
-        </div>
+        </form>
       </div>
 
       <div className="user-details ">

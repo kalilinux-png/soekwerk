@@ -6,7 +6,7 @@ const LoginPagesPage = () => {
   return (
     <>
       <Navbar className="" />
-      <div className="bg-[#5c6065] mt-[13.3rem] h-[100vh] w-full overflow-auto flex-2">
+      <div className="bg-[#5c6065] mt-[13.3rem] h-[100vh] w-full flex-2">
         <LoginPage />
       </div>
     </>
