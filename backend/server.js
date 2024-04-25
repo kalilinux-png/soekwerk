@@ -64,7 +64,7 @@ app.options('*', (req, res) => {
 
 app.use(cookieParser())
 app.use(fileUpload());
-app.use(express.json()); // cookies parser
+app.use(express.json({limit: '50mb'})); // cookies parser
 app.use(logRequests)
 // Routes 
 app.use('/api/auth', authRoutes);

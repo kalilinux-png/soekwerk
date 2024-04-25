@@ -3,6 +3,7 @@ import AgentDetails from './AgentDetails'
 import { fetchJobs, downloadExcel, addJob } from "../actions/jobActions"
 import { useSelector, useDispatch } from 'react-redux';
 import ExcelUploader from '../Pages/ExcelUpload';
+import FileUpload from "../components/FileUpload"
 import dayjs from 'dayjs'; // Import dayjs library
 
 const CreateListing = () => {
@@ -20,7 +21,8 @@ const CreateListing = () => {
     country: '',
     region: '',
     city: '',
-    webLink: ''
+    webLink: '',
+    
   });
 
   const { title, description, companyName, expiryDate, field, country, region, city, webLink } = formData;
@@ -31,20 +33,21 @@ const CreateListing = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    formData.jobFile = window.localStorage.fileid
     // Dispatch action to add job with form data
     dispatch(addJob(formData));
     // Reset form after submission
-    setFormData({
-      title: '',
-      description: "",
-      companyName: '',
-      expiryDate: '',
-      field: '',
-      country: '',
-      region: '',
-      city: '',
-      webLink: ''
-    });
+    // setFormData({
+    //   title: '',
+    //   description: "",
+    //   companyName: '',
+    //   expiryDate: '',
+    //   field: '',
+    //   country: '',
+    //   region: '',
+    //   city: '',
+    //   webLink: ''
+    // });
     dispatch(fetchJobs());
 
   }
@@ -174,6 +177,7 @@ const CreateListing = () => {
             <div className='flex flex-col justify-end'>
               <button type="submit" className='py-1.5 px-14 mt-2 rounded-md text-[1.2rem] text-[#fff]  font-bold bg-[#9ad19f]'>Create</button>
             </div>
+            <FileUpload />
             <ExcelUploader />
           </div>
         </form>

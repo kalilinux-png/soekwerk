@@ -6,7 +6,7 @@ exports.createJobFile = async (req, res) => {
     const { filename, contentType, data } = req.body;
     const jobFile = new JobFile({ filename, contentType, data });
     await jobFile.save();
-    res.status(201).json(jobFile);
+    res.status(201).json({ "id": jobFile._id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: 'Server error' });
