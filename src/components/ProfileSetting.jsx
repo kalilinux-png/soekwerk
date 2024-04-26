@@ -56,13 +56,11 @@ const ProfileSetting = () => {
     // console.log("errors", errors, isValid);
     // if (isValid) {
     setError("");
-    const token = localStorage.getItem('token');
-    dispatch(updatePassword(token, form)) // Dispatching change password action
+    dispatch(updatePassword(form)) // Dispatching change password action
       .then((response) => {
         // Assuming the JWT token is returned in the response
         console.log("login response-------", response)
         // Store the token in local storage
-        history('/create_listing');
       })
       .catch((error) => {
         console.log("login error", error)
@@ -117,7 +115,7 @@ const ProfileSetting = () => {
           <input
             onChange={handleChange}
             className="py-2.5 px-5 rounded-md placeholder:text-[#000] placeholder:text-[0.9rem]"
-            type="password"
+            type="text"
             name="newPassword" // Add name attribute
             placeholder="New Password"
             value={form.newPassword} // Add value attribute

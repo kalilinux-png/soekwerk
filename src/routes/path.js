@@ -5,4 +5,5 @@ export const Paths = {
   users: "/users",
   profileSetting: "/profile_settings",
   profileStaff: "/profile_staffs",
+  file: "/file",
 }

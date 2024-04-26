@@ -25,11 +25,10 @@ export const updateProfile = (token, profileData) => async (dispatch) => {
   }
 };
 
-export const updatePassword = (token, passwordData) => async (dispatch) => {
+export const updatePassword = ( passwordData) => async (dispatch) => {
   dispatch({ type: UPDATE_PASSWORD_REQUEST });
   try {
     const response = await axios.put(endpoints.profile.password, passwordData, {
-      headers: { Authorization: `Bearer ${token}` },
     });
     dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: response.data });
 

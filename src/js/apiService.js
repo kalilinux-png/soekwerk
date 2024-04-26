@@ -40,10 +40,9 @@ const ApiService = {
                 throw new Error(error.response.data.message || 'Profile update failed');
             }
         },
-        updatePassword: async (token, passwordData) => {
+        updatePassword: async ( passwordData) => {
             try {
                 const response = await apiService.put(endpoints.profile.password, passwordData, {
-                    headers: { Authorization: `Bearer ${token}` },
                 });
                 return response.data;
             } catch (error) {
