@@ -20,16 +20,16 @@ const AgentDetails = () => {
   const user = currentUser[0]
 
   return (
-    <div className="agent-details flex items-center justify-between gap-14 py-6 border-b-2 border-[#000]">
-      <div className="uppercase text-[1.2rem]">
+    <div className="agent-details flex flex-col md:flex-row items-center justify-between gap-4 py-6 border-b-2 border-[#000]">
+      <div className="uppercase md:text-[0.7rem] lg:text-[1.1rem]">
         Agent Code:{" "}
         <span className="text-[#c85e22] font-semibold">{user?.staffCode}</span>
       </div>
-      <div className="uppercase text-[1.2rem]">
+      <div className="uppercase md:text-[0.7rem] lg:text-[1.1rem]">
         Agent Code:{" "}
         <span className="text-[#c85e22] font-semibold">{user?.staffCode}</span>
       </div>
-      <div className="uppercase text-[1.2rem]">
+      <div className="uppercase md:text-[0.7rem] lg:text-[1.1rem]">
         Agent Code:{" "}
         <span className="text-[#c85e22] font-semibold">{user?.staffCode}</span>
       </div>

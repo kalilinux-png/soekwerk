@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import validateLogin from '../validations/login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { notifySuccess } from '../utils/helper';
 
 const LoginPage = () => {
   const { logins, handleSubmit } = useForm();
@@ -41,6 +42,7 @@ const LoginPage = () => {
           localStorage.setItem('email', form.email);
           // Redirect to the dashboard page
           history('/create_listing');
+          notifySuccess('Login Successful')
         })
         .catch((error) => {
           console.log("login error", error)
@@ -58,7 +60,7 @@ const LoginPage = () => {
     <>
       <div className="py-[4rem] px-10">
         <div className="w-full max-w-[1120px] mx-auto  bg-[#fff] flex items-center rounded-[1.9rem]">
-          <div className="w-full login bg-[#c7bdb1] px-[5rem] py-[2.5rem] rounded-tl-[1.9rem] rounded-bl-[1.9rem]">
+          <div className="w-full login bg-[#c7bdb1] px-[2.5rem] md:px-[5rem] py-[2.5rem] rounded-[2rem] md:rounded-tr-[0rem] md:rounded-br-[0rem] md:rounded-tl-[1.9rem] md:rounded-bl-[1.9rem]">
             <div className="form-heading text-left">
               <h1 className="font-bold text-[1.5rem]">Login</h1>
               <span className="text-[0.9rem]">Login and create listing</span>
@@ -86,7 +88,7 @@ const LoginPage = () => {
             <p className="Capitalize my-4 text-left">Forget Password- ? <span className="font-bold">Click here</span></p>
           </div>
 
-          <div className="image  px-9">
+          <div className="image hidden md:block px-9">
             <img className="w-[clamp(600px,2vw,800px)] " src={loginImg} alt="" />
           </div>
         </div>

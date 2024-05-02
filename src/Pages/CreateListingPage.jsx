@@ -8,11 +8,11 @@ const CreateListingPage = () => {
     <>
       <Navbar />
       <div className="flex ">
-        <div className="h-auto md:h-[100vh] border-r border-[#ccc] px-0">
+        <div className="h-auto  border-r border-[#ccc] px-0">
           <Sidebar />
         </div>
 
-        <div className="bg-[#f0f0f4] h-[100vh] w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
+        <div className="inner-body bg-[#f0f0f4] h-[100vh] w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
           <CreateListing />
         </div>
       </div>

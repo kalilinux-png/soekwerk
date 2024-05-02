@@ -8,7 +8,6 @@ const ExcelUploader = () => {
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-
   };
   useEffect(() => {
     if (file) {
@@ -36,10 +35,10 @@ const ExcelUploader = () => {
   };
 
   return (
-    <div className='flex flex-col justify-end'>
-      <label className='uppercase text-[1rem] font-semibold '>Upload Bulk Job </label>
+    <div className='flex flex-col justify-end mt-2'>
+      <label className='uppercase mb-1 text-[0.8rem] lg:text-[0.9rem] font-semibold '>Upload Bulk Job </label>
       <form className="max-w-sm relative">
-        <label htmlFor="file-input" className="w-full inline-flex items-center px-4 py-2 bg-[#fff] border border-gray-200 shadow-sm rounded-lg text-sm cursor-pointer hover:bg-gray-300 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:border-blue-500 focus-within:ring-1 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
+        <label htmlFor="file-input" className="mb-0 w-full inline-flex items-center px-4 py-2 bg-[#fff] border border-gray-200 shadow-sm rounded-lg text-sm cursor-pointer hover:bg-gray-300 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:border-blue-500 focus-within:ring-1 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
           <PiUploadBold className="h-6 w-6 mr-2" />
         </label>
         <input type="file" name="file-input" id="file-input" className="hidden" onChange={handleFileChange} />

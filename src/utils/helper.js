@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+
+
 export const url = process.env.REACT_APP_API_ENDPOINT || "";
 
 //GET LOCAL STORAGE ITEM
@@ -24,3 +27,27 @@ export const getDefaultState = (keyName) => {
     return null;
   }
 };
+
+export const notifySuccess = (() => {
+  let hasToastBeenShown = false;
+  return (message) => {
+    if (!hasToastBeenShown) {
+      hasToastBeenShown = true;
+
+      const toastId = toast.success(message, {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+
+        onClose: () => {
+          hasToastBeenShown = false; // Reset the flag when the toast is closed.
+        },
+      });
+      return toastId;
+    }
+  };
+})();
