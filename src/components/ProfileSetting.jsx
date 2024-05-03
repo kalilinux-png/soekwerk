@@ -76,28 +76,28 @@ const ProfileSetting = () => {
       <AgentDetails />
 
       <div>
-        <h1 className="text-[#392e2d] text-[clamp(2rem,5vw,5rem)] text-left uppercase font-extrabold py-5 border-b-2 border-[#000]">
+        <h1 className="text-[#392e2d] text-[clamp(1.8rem,4vw,5rem)] text-left uppercase font-extrabold py-5 border-b-2 border-[#000]">
           Profile Settings
         </h1>
 
-        <div className="profile-detail flex flex-col gap-4 max-w-[70%] py-6 border-b-2 border-[#000]">
+        <div className="profile-detail flex flex-col gap-4 max-w-[100%] md:max-w-[80%] lg:max-w-[70%] py-6 border-b-2 border-[#000]">
           <div className="flex items-center justify-between text-left">
-            <span className="w-[50%] font-bold">Name</span>
+            <span className="w-[50%] uppercase font-bold">Name</span>
             <span className="w-[50%]">{user.name}</span>
           </div>
           <div className="flex items-center justify-between text-left">
-            <span className="w-[50%] font-bold">Email Address</span>
+            <span className="w-[50%] uppercase font-bold">Email Address</span>
             <span className="w-[50%]">{user.email}</span>
           </div>
           <div className="flex items-center justify-between text-left">
-            <span className="w-[50%] font-bold">Mobile Number</span>
+            <span className="w-[50%] uppercase font-bold">Mobile Number</span>
             <span className="w-[50%]">{user.mobile || "No Mobile Number Found"}</span>
           </div>
         </div>
       </div>
 
-      <div className="change-password flex items-center gap-8 py-6">
-        <form onSubmit={onSubmit} className="flex flex-col gap-4 w-full max-w-[40%] xl:max-w-[25%]">
+      <div className="change-password flex flex-col md:flex-row items-center gap-8 py-6">
+        <form onSubmit={onSubmit} className="flex flex-col gap-4  w-full max-w-[100%] md:max-w-[50%] xl:max-w-[25%]">
           <input
             onChange={handleChange}
             className="py-2.5 px-5 rounded-md placeholder:text-[#000] placeholder:text-[0.9rem]"
@@ -115,13 +115,13 @@ const ProfileSetting = () => {
             value={form.newPassword}
           />
           <button
-            className="bg-[#37266b] shadow-[0px_0px_20px_5px_#baa6e7] py-3 mt-3 rounded-md text-[#fff] uppercase font-semibold"
+            className="bg-[#37266b] shadow-[0px_0px_20px_5px_#baa6e7] py-3 mt-3 rounded-md text-[0.8rem] lg:text-[1.2rem] text-[#fff] uppercase font-semibold"
           >
             Change Password
           </button>
         </form>
 
-        <form onSubmit={handleCreateStaff} className="flex flex-col gap-4 w-full max-w-[40%] xl:max-w-[25%]">
+        <form onSubmit={handleCreateStaff} className="flex flex-col gap-4  w-full max-w-[100%] md:max-w-[50%] xl:max-w-[25%]">
           <input
             onChange={handleNewUserChange}
             className="py-2.5 px-5 rounded-md placeholder:text-[#000] placeholder:text-[0.9rem]"
@@ -166,7 +166,7 @@ const ProfileSetting = () => {
             ))}
           </select>
           <button
-            className="bg-[#37266b] shadow-[0px_0px_20px_5px_#baa6e7] py-3 px-1 mt-3 rounded-md text-[#fff] uppercase font-semibold"
+            className="bg-[#37266b] shadow-[0px_0px_20px_5px_#baa6e7] py-3 px-1 mt-3 rounded-md  text-[0.8rem] lg:text-[1.2rem] text-[#fff] uppercase font-semibold"
           >
             Create Staff Account
           </button>

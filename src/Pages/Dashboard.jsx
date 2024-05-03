@@ -13,7 +13,7 @@ const Dashboard = () => {
           <Sidebar />
         </div>
 
-        <div className="bg-[#f0f0f4]  w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
+        <div className="inner-body bg-[#f0f0f4]  w-full overflow-auto flex-2 px-0 md:px-2 pt-3">
           <ProfileSetting />
         </div>
       </div>

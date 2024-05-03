@@ -16,4 +16,16 @@ code {
     monospace;
 }
 
+.inner-body::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-toast {
+  min-width: 200px;
+  background-color: #FFFFFF !important;
+  margin: auto;
+  position: relative;
+  margin-top: 15%;
+}
+
 

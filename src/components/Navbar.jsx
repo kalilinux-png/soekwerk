@@ -10,8 +10,8 @@ const Navbar = () => {
           <img className='w-[6rem] lg:w-[9rem]' src={navBar} alt="" />
 
           <div className="flex flex-col">
-            <span className='leading-snug tracking-wide text-[clamp(1rem,7vw,4.3rem)] text-[#000] font-extrabold'>SoekWerk.AI</span>
-            <span className='leading-snug text-[clamp(1rem,7vw,1.5rem)] text-[#000] font-extrabold'>Smart Matches, Bright Futures.</span>
+            <span className='leading-snug tracking-wide text-[clamp(2rem,7vw,4.3rem)] text-[#000] font-extrabold'>SoekWerk.AI</span>
+            <span className='leading-snug text-[clamp(1rem,4vw,1.5rem)] text-[#000] font-extrabold'>Smart Matches, Bright Futures.</span>
           </div>
         </div>
 
