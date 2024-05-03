@@ -7,7 +7,7 @@ const ProfileSettingPage = () => {
   return (
     <>
       <Navbar />
-      <div className="flex mt-[13.3rem]">
+      <div className="flex ">
         <div className="h-auto md:h-[100vh] border-r border-[#ccc] px-0">
           <Sidebar />
         </div>

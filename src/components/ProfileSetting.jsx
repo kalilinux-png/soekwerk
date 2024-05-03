@@ -166,7 +166,7 @@ const ProfileSetting = () => {
             ))}
           </select>
           <button
-            className="bg-[#37266b] shadow-[0px_0px_20px_5px_#baa6e7] py-3 mt-3 rounded-md text-[#fff] uppercase font-semibold"
+            className="bg-[#37266b] shadow-[0px_0px_20px_5px_#baa6e7] py-3 px-1 mt-3 rounded-md text-[#fff] uppercase font-semibold"
           >
             Create Staff Account
           </button>

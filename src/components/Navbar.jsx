@@ -5,7 +5,7 @@ import navBar from "../assets/images/soekwerk.jpeg"
 const Navbar = () => {
   return (
     <>
-      <div className='fixed top-0 flex items-center justify-between bg-[#fff] w-full z-[99999] py-[2rem] pl-[1.5rem] lg:pl-[3rem] border-b border-[#000]'>
+      <div className='flex items-center justify-between bg-[#fff] w-full z-[99999] py-[2rem] pl-[1.5rem] lg:pl-[3rem] border-b border-[#000]'>
         <div className='flex items-center gap-3 lg:gap-10'>
           <img className='w-[6rem] lg:w-[9rem]' src={navBar} alt="" />
 
