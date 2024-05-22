@@ -10,10 +10,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require("./swagger.json")
 
 // All Routes 
-// root 
-app.use("/",(req,res)=>{ 
-res.send("Hello World")
-} )
 const authRoutes = require('./routes/auth');
 const jobRoutes = require('./routes/jobs');
 const companyRoutes = require('./routes/company');
@@ -47,6 +43,9 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+// read root
+app.use("/",(req,res)=>{
+res.send("HELLO WORLD")})
 // CORS middleware
 app.use((req, res, next) => {
     const allowedOrigins = ['https://soekwerk-beryl.vercel.app', 'http://localhost:3000'];
