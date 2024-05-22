@@ -10,6 +10,10 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require("./swagger.json")
 
 // All Routes 
+// root 
+app.use("/",(req,res)=>{ 
+res.send("Hello World")
+} )
 const authRoutes = require('./routes/auth');
 const jobRoutes = require('./routes/jobs');
 const companyRoutes = require('./routes/company');
